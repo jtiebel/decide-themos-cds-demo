@@ -50,7 +50,6 @@ class TherapyPlanApp {
         logToConsole("FHIR CDS Hook Trigger (Goalset)", {
           trigger: {
             conditionStroke: conditionStroke.code.coding[0],
-            // Hier wird der Zustand zwar geprüft, aber im UI wird nun immer der Physiotherapie-Link verwendet.
             conditionAbnormalGait: conditionAbnormalGait.code.coding[0],
             serviceRequestGait: serviceRequestGait.code.coding[0]
           },
@@ -265,12 +264,10 @@ async loadPatientData() {
           ...this.addedGoals.map(goal => ({ resource: goal }))
         ]
       };
-      logToConsole("Combined Bundle for Recommendation Evaluation", combinedBundle, { info: "Patientdaten plus Ziele" });
       const triggerResult = evaluateTriggerGuidelineRecommendation(combinedBundle, code);
       logToConsole("Recommendation Trigger Evaluation", { code, triggerResult });
       if (triggerResult) {
         const recommendationData = await loadJSON(this.apiEndpoints.recommendationExample);
-        logToConsole("Recommendation Example Loaded", recommendationData, { cdsLibrary: "RecommendationCDSHook", version: "1.0.0" });
         const extractedRecs = this.extractRecommendations(recommendationData, code);
         this.guidelineRecs = extractedRecs;
         return this.guidelineRecs;
