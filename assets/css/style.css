@@ -3,6 +3,24 @@
       --console-key-color: goldenrod;
       --console-value-color: white;
     }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* halbtransparentes Grau */
+  border-radius: 3px;
+  border: none;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
     html, body {
       margin: 0;
       padding: 0;
