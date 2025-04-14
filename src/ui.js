@@ -13,7 +13,7 @@ export function updatePatientInfo(patient) {
 export function updateConditions(condition, elementId) {
   if (condition) {
     const { code: { coding: [coding] } } = condition;
-    document.getElementById(elementId).innerHTML = `<p><strong>${elementId}:</strong> ${coding.code} – ${coding.display}</p>`;
+    document.getElementById(elementId).innerHTML = `<p><strong>Diagnose</strong> ${coding.code} – ${coding.display}</p>`;
   }
 }
 
