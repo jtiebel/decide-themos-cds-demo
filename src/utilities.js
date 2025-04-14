@@ -29,17 +29,16 @@ export function logToConsole(label, data, extra = {}) {
   headerDiv.textContent = `[${time}] ${label}:`;
   container.appendChild(headerDiv);
 
-  // Falls extra.source vorhanden, erstelle einen separaten DIV mit dem klickbaren Link
+  // Falls extra.source vorhanden, erstelle ein separates DIV mit dem klickbaren Link
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
-    linkDiv.innerHTML = `<span>{</span><br>"<span class="link"><span>source:</span> ${extra.source}</span>"<br><span>}</span>`;
+    linkDiv.innerHTML = `Source: ${extra.source}`;
     container.appendChild(linkDiv);
-    // Den Link entfernen, damit er nicht doppelt erscheint
     delete extra.source;
   }
 
-  // Wenn extra.hideData true ist, keine Daten (also JSON) im pre-Block ausgeben
+  // Falls hideData nicht gesetzt ist, wird der Daten-Block als PRE ausgegeben
   if (!extra.hideData) {
     const preData = document.createElement('pre');
     preData.classList.add('highlight');
@@ -47,7 +46,7 @@ export function logToConsole(label, data, extra = {}) {
     container.appendChild(preData);
   }
 
-  // Falls zusätzliche Details (ohne hideData) vorhanden sind, in einem separaten PRE ausgeben
+  // Falls weitere zusätzliche Details vorhanden sind und hideData nicht gesetzt ist, ausgeben
   if (Object.keys(extra).length > 0 && !extra.hideData) {
     const preExtra = document.createElement('pre');
     preExtra.classList.add('highlight');
@@ -62,5 +61,6 @@ export function logToConsole(label, data, extra = {}) {
   // Automatisches Scrollen ans Ende
   setTimeout(() => { consoleDiv.scrollTop = consoleDiv.scrollHeight; }, 10);
 }
+
 
 
