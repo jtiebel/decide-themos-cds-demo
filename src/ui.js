@@ -13,7 +13,7 @@ export function updatePatientInfo(patient) {
 export function updateConditions(condition, elementId) {
   if (condition) {
     const { code: { coding: [coding] } } = condition;
-    document.getElementById(elementId).innerHTML = `<p><strong>Diagnose:</strong> Schlaganfall (<a href="https://www.icd-code.de/icd/code/I63.-.html" target="_blank">${coding.display} ${coding.code}</a></p>`;
+    document.getElementById(elementId).innerHTML = `<p><strong>Diagnose:</strong> Schlaganfall (<a href="https://www.icd-code.de/icd/code/I63.-.html" target="_blank">${coding.display} ${coding.code}</a>)</p>`;
   }
 }
 
