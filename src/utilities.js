@@ -33,7 +33,7 @@ export function logToConsole(label, data, extra = {}) {
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
-    linkDiv.innerHTML = `Source: ${extra.source}`;
+    linkDiv.innerHTML = `<span>{</span><br>source: ${extra.source}<br><span>}</span>`;
     container.appendChild(linkDiv);
     // Den Link aus extra entfernen, damit er nicht noch in den pre-Bereich übernommen wird
     delete extra.source;
