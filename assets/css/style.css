@@ -99,6 +99,14 @@
     .console-null {
       color: var(--console-value-color);
     }
+    .console-link {
+      font-size: .8rem;
+      color: var(--console-key-color);
+      display: inline-block;
+      white-space: nowrap;
+      margin-left: .5rem;
+      margin: .5rem;
+    }
     .recommendation-box {
       border-left: 4px solid #198754;
       padding-left: 1rem;
