@@ -26,7 +26,7 @@ export function evaluateTriggerGoalset(patientBundle) {
     
     if (resource.resourceType === "Condition" && resource.code?.coding) {
       resource.code.coding.forEach(coding => {
-        if (coding.system === 'http://hl7.org/fhir/sid/icd-10' && coding.code === 'I63') {
+        if (coding.system === 'http://hl7.org/fhir/sid/icd-10' && coding.code === 'I63.3') {
           hasStroke = true;
         }
         if (coding.system === 'http://snomed.info/sct' && coding.code === '22325002') {
