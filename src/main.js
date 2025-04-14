@@ -32,6 +32,7 @@ class TherapyPlanApp {
   bindEvents() {
     // Event: Öffne das Goalset Modal und prüfe Trigger-Bedingungen
     document.getElementById("btn-open-goal-modal").addEventListener("click", async () => {
+      document.getElementById("modal-ziel-description").value = "";
       const patientBundle = this.bundle;
       const conditionStroke = patientBundle.entry.find(
         e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
