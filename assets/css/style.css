@@ -209,3 +209,6 @@
     .toast-container{
       right: 33.33% !important;
     }
+.card-body .badge{
+ margin: .3rem 0 !important;
+}
