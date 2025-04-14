@@ -212,4 +212,5 @@
     }
 .card-body .badge{
  margin: .3rem 0 !important;
+ margin-top:.5rem !important;
 }
