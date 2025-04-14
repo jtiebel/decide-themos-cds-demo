@@ -32,7 +32,7 @@ Die Anwendung verwendet folgende Technologien und Frameworks:
 
 ## Demo
 
-Eine Demo kann abgerufen werden über: [decide-themos-cds-demo](https://github.com/jtiebel/decide-themos-cds-demo)
+Eine Demo kann abgerufen werden über: [decide-themos-cds-demo](https://jtiebel.github.io/decide-themos-cds-demo)
 
 ## Verwendung
 
