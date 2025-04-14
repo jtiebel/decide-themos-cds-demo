@@ -353,15 +353,14 @@ class TherapyPlanApp {
         const strengthMap = {
           "STRONG": { text: "Starke Empfehlung", badge: "bg-success" },
           "WEAK": { text: "Schwache Empfehlung", badge: "bg-warning" },
-          "WEAKAGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" },
-          "WEAK AGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" }
+          "WEAKAGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" }
         };
         const { text: strengthText, badge: badgeClass } = strengthMap[strengthUpper] || { text: pd.strength, badge: "bg-secondary" };
         const badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.8rem; margin-left:10px;">${strengthText}</span>`;
         return `
           <div class="card mb-2" data-index="${idx}" style="cursor: pointer;">
             <div class="card-body">
-              <h6><b>${pd.title}${badgeHtml}</b></h6>
+              <h6><b>${pd.title}</b><br>${badgeHtml}</h6>
               <p style="font-size:.9rem;color: grey">${pd.description}</p>
             </div>
           </div>
