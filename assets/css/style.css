@@ -46,7 +46,6 @@
     .console-wrapper {
       flex: 0 0 33.33%;
       max-height: 100vh;
-      overflow-y: auto;
       background-color: #1e1e1e;
       color: #d4d4d4;
       font-family: monospace;
@@ -83,7 +82,6 @@
     }
     .console-box {
       max-height: calc(100vh - 4rem);
-      overflow-y: auto;
       white-space: pre-wrap;
     }
     .console-box pre {
