@@ -1,4 +1,5 @@
-# EHR Patientensicht
+# FHIR-based Guideline CDS Demo
+## DECIDE - Digitale Leitlinie zur Therapie der Mobilität nach Schlaganfall
 
 Dieses Repository enthält eine Webanwendung, die eine Demonstration einer EHR-Umgebung (Electronic Health Record) darstellt. Die Anwendung fokussiert sich auf die Therapieplanung bei Schlaganfallpatienten, indem FHIR-Daten (Fast Healthcare Interoperability Resources) in ein interaktives Frontend integriert werden. Dabei werden sowohl Patientenstammdaten als auch klinische Informationen genutzt, um dynamisch Therapieziele, Leitlinienempfehlungen und einen kompletten Pflegeplan (CarePlan) zu erstellen.
 
@@ -15,9 +16,9 @@ Dieses Repository enthält eine Webanwendung, die eine Demonstration einer EHR-U
 ## Features
 
 * **FHIR-Datenintegration:** Lädt Patientendaten, Diagnosen, Beobachtungsdaten und Service Requests im FHIR-Format.
-* **Therapieplanung:** Ermöglicht die Definition von Therapie-/Rehabilitationszielen sowie das Hinzufügen und Verwalten von Therapieinterventionen.
-* **CDS Hooks:** Dynamische Evaluierung von FHIR-Bundles zur Triggerung von CDS (Clinical Decision Support)-Hooks für Goalset und Recommendation.
-* **Interaktives Frontend:** Übersichtliche Darstellung der Patientendaten und dynamische Interaktion via Bootstrap-Komponenten (Modals, Toasts, Cards).
+* **Therapieplanung:** Ermöglicht die Definition von Therapie-/Rehabilitationszielen sowie das Hinzufügen und Verwalten von Therapieinterventionen auf Basis von SNOMED CT.
+* **CDS Hooks:** Dynamische Evaluierung von FHIR-Bundles zur Triggerung von CDS (Clinical Decision Support)-Hooks für Goalsets und Recommendations.
+* **Interaktives Frontend:** Übersichtliche Darstellung der Patientendaten und dynamische Interaktion via Bootstrap-Komponenten.
 * **Logging:** Übersichtliche Darstellung der FHIR-API-Kommunikation direkt im Browser.
 
 ## Technologien
@@ -28,25 +29,11 @@ Die Anwendung verwendet folgende Technologien und Frameworks:
 * **JavaScript:** Dynamik, Datenabruf, FHIR-Datenverarbeitung, Evaluierungen und Logik zur Therapieplanung.
 * **Bootstrap 5.3.3:** Für responsives Design und UI-Komponenten.
 * **FHIR:** Standard zur Übertragung und Speicherung von Gesundheitsdaten.
-* **RESTful API:** Zum Abruf von FHIR JSON-Beispielen (z.B. über GitHub Raw-URLs).
+* **RESTful API:** Zum Abruf von FHIR JSON-Beispielen (über GitHub Raw-URLs).
 
-## Installation
+## Demo
 
-1.  **Repository klonen:**
-    ```bash
-    git clone [https://github.com/dein-benutzername/ehr-patientensicht.git](https://github.com/dein-benutzername/ehr-patientensicht.git)
-    cd ehr-patientensicht
-    ```
-2.  **Projektdateien öffnen:**
-    Stelle sicher, dass du eine aktuelle Version eines modernen Webbrowsers verwendest (Chrome, Firefox, Edge usw.).
-    Öffne die `index.html` direkt im Browser oder starte einen lokalen Webserver, um alle Funktionen ohne CORS-Probleme auszuführen.
-3.  **Lokaler Webserver (optional):**
-    Falls du einen lokalen Server benötigst, kannst du beispielsweise Python verwenden:
-    ```bash
-    # Für Python 3.x
-    python -m http.server 8000
-    ```
-    Dann im Browser unter `http://localhost:8000` öffnen.
+Eine Demo kann abgerufen werden über: [decide-themos-cds-demo](https://github.com/jtiebel/decide-themos-cds-demo)
 
 ## Verwendung
 
@@ -63,30 +50,8 @@ Nach dem Öffnen der Anwendung im Browser:
 5.  **Logging und Debugging:**
     Alle FHIR-Kommunikationen und Evaluierungsschritte werden in einem konsolenartigen Bereich auf der rechten Seite der Anwendung protokolliert.
 
-## Projektstruktur
-
-```bash
-ehr-patientensicht/
-├── index.html                   # Hauptdatei der Anwendung
-├── style.css                    # (Optional) Externe CSS-Datei (in diesem Beispiel inline eingebettet)
-├── script.js                    # (Optional) Externe JavaScript-Datei (in diesem Beispiel inline eingebettet)
-├── goalset-cds-example.json     # Beispiel-JSON für Goalset-CDS Hook
-├── recommendation-cds-example.json  # Beispiel-JSON für Recommendation-CDS Hook
-└── README.md                    # Diese Datei
-
-**Hinweis:** In diesem Repository sind die Skripte in der HTML-Datei integriert, sodass keine weitere Aufteilung nötig ist. Für größere Projekte empfiehlt sich jedoch eine saubere Trennung von HTML, CSS und JavaScript.
-
-## Beitragen
-
-Beiträge zum Projekt sind willkommen! Falls du Anregungen, Bugfixes oder neue Features hast, folge bitte diesen Schritten:
-
-1.  Forke das Repository.
-2.  Erstelle einen neuen Branch (`feature/neues-feature`).
-3.  Führe deine Änderungen durch und committe diese.
-4.  Erstelle einen Pull Request mit einer detaillierten Beschreibung deiner Änderungen.
 
 ## Lizenz
 
-Dieses Projekt steht unter der [MIT-Lizenz](https://opensource.org/licenses/MIT). Weitere Informationen findest du in der `LICENSE`-Datei.
-
-Dieses Projekt dient als Demonstration der Integration von FHIR-Daten und CDS Hooks in einer EHR-Umgebung zur dynamischen Therapieplanung.
+Dieses Projekt steht unter der [MIT-Lizenz](https://opensource.org/licenses/MIT). 
+Dieses Projekt dient lediglich als Demonstration der Integration von FHIR-Daten und CDS Hooks in einer EHR-Umgebung zur dynamischen Therapieplanung.
