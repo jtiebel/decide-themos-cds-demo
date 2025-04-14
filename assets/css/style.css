@@ -106,7 +106,7 @@
       white-space: nowrap;
       margin: .5rem;
     }
-    .console-link .span{
+    .console-link span{
       color: var(--console-key-color);
     }
     .console-link .link{
