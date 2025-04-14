@@ -33,7 +33,7 @@ export function logToConsole(label, data, extra = {}) {
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
-    linkDiv.innerHTML = `<span>{</span><br><span class="link">source: ${extra.source}</span><br><span>}</span>`;
+    linkDiv.innerHTML = `<span>{</span><br>"<span class="link"><span>source:</span> ${extra.source}</span>"<br><span>}</span>`;
     container.appendChild(linkDiv);
     // Den Link entfernen, damit er nicht doppelt erscheint
     delete extra.source;
