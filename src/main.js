@@ -151,23 +151,23 @@ class TherapyPlanApp {
     }
   }
 
-  async evaluateGoalsetHook(patientBundle) {
-    try {
-      const triggerResult = evaluateTriggerGoalset(patientBundle);
-      logToConsole("Ergebnis Goalset Evaluation", { triggerResult });
-      if (triggerResult) {
-        const exRes = await loadJSON(this.apiEndpoints.goalsetExample);
-        logToConsole("Goalset Example Loaded", exRes, { cdsLibrary: "GoalsetCDSHook", version: "1.0.0" });
-        return exRes;
-      } else {
-        logToConsole("Goalset Evaluation", "Kein Trigger – Goalset Example wird nicht geladen.");
-        return null;
-      }
-    } catch (error) {
-      logToConsole("evaluateGoalsetHook Error", { error: error.message });
+async evaluateGoalsetHook(patientBundle) {
+  try {
+    const triggerResult = await evaluateTriggerGoalset(patientBundle);
+    logToConsole("Ergebnis Goalset Evaluation", { triggerResult });
+    if (triggerResult) {
+      const exRes = await loadJSON(this.apiEndpoints.goalsetExample);
+      logToConsole("Goalset Example Loaded", exRes, { cdsLibrary: "GoalsetCDSHook", version: "1.0.0" });
+      return exRes;
+    } else {
+      logToConsole("Goalset Evaluation", "Kein Trigger – Goalset Example wird nicht geladen.");
       return null;
     }
+  } catch (error) {
+    logToConsole("evaluateGoalsetHook Error", { error: error.message });
+    return null;
   }
+}
 
   handleModalGoalAccept() {
     const selectEl = document.getElementById("modal-rehaziel");
