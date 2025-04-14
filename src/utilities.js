@@ -33,7 +33,7 @@ export function logToConsole(label, data, extra = {}) {
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
-    linkDiv.innerHTML = `Source: ${extra.source}`;
+    linkDiv.innerHTML = `source: ${extra.source}`;
     container.appendChild(linkDiv);
     delete extra.source;
   }
