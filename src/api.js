@@ -1,6 +1,6 @@
 // File: src/api.js
 
-import { logToConsole } from './utilities.js';
+import { logToConsole } from "./utilities.js";
 
 // Funktion zum Laden von JSON-Daten
 export async function loadJSON(url) {
@@ -15,3 +15,4 @@ export async function loadJSON(url) {
     throw error;
   }
 }
+
