@@ -5,7 +5,7 @@ import { logToConsole } from "./utilities.js";
  * @returns {Promise<Object>} Das CDS Hook Library Objekt (als JSON).
  */
 async function loadCDSHookLibrary() {
-  const libraryUrl = "https://raw.githubusercontent.com/YourUser/YourRepo/goalset-cds-hook-library.json";
+  const libraryUrl = "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/goalset-cds-hook-library.json";
   try {
     const res = await fetch(libraryUrl);
     if (!res.ok) {
