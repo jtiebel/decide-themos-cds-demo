@@ -313,7 +313,7 @@ class TherapyPlanApp {
       status: "active",
       code: {
         coding: [{
-          system: "http://myCDSS.com/recommendations",
+          system: `https://magicapp.org/guidelines/${rec.guidelineId}/recommendations/${rec.recommendationId}`,
           code: `${rec.guidelineId}-${rec.recommendationId}`,
           display: rec.heading
         }]
@@ -415,7 +415,7 @@ class TherapyPlanApp {
         coding: [{
           system: "http://snomed.info/sct",
           code: "NA",
-          display: "NA"
+          display: "Bedarf noch einer Codierung!"
         }]
       },
       note: [{
