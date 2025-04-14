@@ -11,7 +11,6 @@ export async function loadJSON(url) {
     logToConsole(
       "FHIR Bundle Response",
       { resourceType: "Bundle", status: res.status, ok: res.ok },
-      { source: link }
     );
     
     if (!res.ok) throw new Error(`HTTP-Fehler: ${res.status}`);
