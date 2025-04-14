@@ -24,10 +24,8 @@ export function updateAbnormalGaitInfo(condition) {
     const { code: { coding: [coding] } } = condition;
     document.getElementById('diagnosis-abnormal-gait-info').innerHTML = `
       <p>
-        <strong>Klinischer Befund:</strong> ${coding.code} – ${coding.display} 
-        (<a href="https://browser.ihtsdotools.org/?perspective=full&amp;conceptId1=${coding.code}&amp;edition=MAIN/2025-04-01&amp;release=&amp;languages=en" target="_blank">
-          ${coding.code} ${coding.display}
-        </a>)
+        <strong>Klinischer Befund:</strong> Gangstörung
+        (<a href="https://browser.ihtsdotools.org/?perspective=full&amp;conceptId1=${coding.code}&amp;edition=MAIN/2025-04-01&amp;release=&amp;languages=en" target="_blank">${coding.code} ${coding.display}</a>)
       </p>
     `;
   }
@@ -52,7 +50,7 @@ export function updateServiceRequests(serviceRequests) {
     const { coding: [coding] } = sr.code;
     const url = `https://browser.ihtsdotools.org/?perspective=full&conceptId1=${coding.code}&edition=MAIN/2025-04-01&release=&languages=en`;
     if (sr.id === "servicerequest-physiotherapy-training") {
-      srHtml += `<p><span>Physiotherapie Training</span> ${coding.display} (<a href="${url}" target="_blank">${coding.code} ${coding.display}</a>)</p>`;
+      srHtml += `<p><span>Physiotherapie Training</span> (<a href="${url}" target="_blank">${coding.code} ${coding.display}</a>)</p>`;
     } else if (sr.id === "servicerequest-ambulation-training") {
       srHtml += `<p><span>└─</span> Mobilitätstraining (<a href="${url}" target="_blank">${coding.code} ${coding.display}</a>)</p>`;
     } else if (sr.id === "servicerequest-gait-training" || sr.id === "servicerequest-gait-reeducation") {
