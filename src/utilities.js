@@ -23,28 +23,29 @@ export function logToConsole(label, data, extra = {}) {
   const container = document.createElement('div');
   container.classList.add('console-entry');
 
-  // Header-DIV: Zeitstempel, Label
+  // Header-DIV: Zeitstempel und Label
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('console-header');
   headerDiv.textContent = `[${time}] ${label}:`;
   container.appendChild(headerDiv);
 
-  // Wenn extra.source vorhanden, erstelle einen separaten DIV mit einem klickbaren Link
+  // Falls extra.source vorhanden ist, einen separaten DIV mit dem klickbaren Link erzeugen
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
     linkDiv.innerHTML = `Source: ${extra.source}`;
     container.appendChild(linkDiv);
-    delete extra.source; // Entferne den Link aus extra, um doppelte Darstellung zu vermeiden
+    // Den Link aus extra entfernen, damit er nicht noch in den pre-Bereich übernommen wird
+    delete extra.source;
   }
 
-  // Erstelle einen separaten PRE-Bereich für die Daten
+  // PRE-Bereich für die formatierten JSON-Daten
   const preData = document.createElement('pre');
   preData.classList.add('highlight');
   preData.innerHTML = syntaxHighlight(data);
   container.appendChild(preData);
 
-  // Falls zusätzliche Details vorhanden sind, füge sie in einem weiteren PRE ein
+  // Falls weitere extra Details vorhanden sind, in einem separaten PRE ausgeben
   if (Object.keys(extra).length > 0) {
     const preExtra = document.createElement('pre');
     preExtra.classList.add('highlight');
@@ -52,10 +53,10 @@ export function logToConsole(label, data, extra = {}) {
     container.appendChild(preExtra);
   }
 
-  // Füge den gesamten Container in das Console-DIV ein
+  // Füge den kompletten Logeintrag in das Console-DIV ein
   const consoleDiv = document.getElementById('console');
   consoleDiv.appendChild(container);
 
-  // Automatisches Scrollen ans Ende der Konsole
+  // Automatisches Scrollen ans Ende
   setTimeout(() => { consoleDiv.scrollTop = consoleDiv.scrollHeight; }, 10);
 }
