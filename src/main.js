@@ -8,8 +8,8 @@ class TherapyPlanApp {
   constructor() {
     this.apiEndpoints = {
       patient: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/patient-example.json", 
-      goalsetExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/goalset-cds-example.json",
-      recommendationExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/recommendation-cds-example.json"
+      goalsetExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/goalset-cds-example.json",
+      recommendationExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/recommendation-cds-example.json"
     };
     this.currentRecommendation = null;
     this.currentGoal = null;
