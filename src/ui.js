@@ -9,12 +9,20 @@ export function updatePatientInfo(patient) {
   `;
 }
 
-// Aktualisiert UI-Bereiche für Conditions
+// Aktualisiert UI-Bereiche für Conditions (allgemein)
 export function updateConditions(condition, elementId) {
   if (condition) {
     const { code: { coding: [coding] } } = condition;
     document.getElementById(elementId).innerHTML = `<p><strong>${elementId}:</strong> ${coding.code} – ${coding.display}</p>`;
   }
+}
+
+// Spezielle UI-Funktion für "diagnosis-abnormal-gait-info"
+// Hier überschreiben wir die Standardanzeige und zeigen stattdessen den Link zu Physiotherapie Training (SNOMED 58452000) an.
+export function updateAbnormalGaitInfo(condition) {
+  document.getElementById('diagnosis-abnormal-gait-info').innerHTML = `
+    <p><strong>Klinischer Befund:</strong> Physiotherapie Training (<a href="https://browser.ihtsdotools.org/?perspective=full&conceptId1=58452000&edition=MAIN/2025-04-01&release=&languages=en" target="_blank">58452000 Physiotherapy training</a>)</p>
+  `;
 }
 
 // Aktualisiert UI-Bereiche für Observations
