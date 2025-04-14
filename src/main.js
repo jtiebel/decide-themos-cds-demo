@@ -116,7 +116,7 @@ async loadPatientData() {
     UI.updatePatientInfo(patient);
     
     // Patient-Ressource als erster Logeintrag (vollständige Ausgabe)
-    logToConsole("Patient Resource", patient);
+    logToConsole("FHIR Resource Patient", patient);
     
     // Weitere Ressourcen extrahieren und in der Konsole loggen
     const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
@@ -124,9 +124,9 @@ async loadPatientData() {
     const observations = getResources("Observation");
     const serviceRequests = getResources("ServiceRequest");
 
-    conditions.forEach((cond, i) => logToConsole(`Condition Resource ${i + 1}`, cond));
-    observations.forEach((obs, i) => logToConsole(`Observation Resource ${i + 1}`, obs));
-    serviceRequests.forEach((sr, i) => logToConsole(`ServiceRequest Resource ${i + 1}`, sr));
+    conditions.forEach((cond, i) => logToConsole(`FHIR Resource Condition ${i + 1}`, cond));
+    observations.forEach((obs, i) => logToConsole(`FHIR Resource Observation ${i + 1}`, obs));
+    serviceRequests.forEach((sr, i) => logToConsole(`FHIR Resource ServiceRequest ${i + 1}`, sr));
 
     // UI: Conditions aktualisieren
     const conditionStroke = this.bundle.entry.find(
