@@ -1,0 +1,162 @@
+ :root {
+      --console-timestamp-color: lightgreen;
+      --console-key-color: goldenrod;
+      --console-value-color: white;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      font-family: Arial, sans-serif;
+      width: 100%;
+      overflow: hidden;
+      font-size: 16px;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .screen-warning {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .app__wrapper {
+      flex: 0 0 66.66%;
+      background-color: #f1f4f6;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      max-width: calc(66.66% - 0.7rem);
+      min-width: 66.66%;
+    }
+    .console-wrapper {
+      flex: 0 0 33.33%;
+      max-height: 100vh;
+      overflow-y: auto;
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: monospace;
+      font-size: 0.9rem;
+      padding: 1rem;
+      padding-right: 0;
+      min-width: 33.33%;
+      max-width: 33.33%;
+    }
+    .app-header {
+      background-color: #004080;
+      color: white;
+      padding: 1rem 2rem;
+      border-bottom: 3px solid #003366;
+    }
+    .section-header {
+      background-color: #e9ecef;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-left: 4px solid #004080;
+    }
+    .card {
+      border-radius: 0.25rem;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      margin: 1rem;
+      cursor: pointer;
+    }
+    .card.active {
+      border: 2px solid #007bff;
+    }
+    .console-box {
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .console-box pre {
+      font-family: monospace;
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+    }
+    .console-timestamp {
+      color: var(--console-timestamp-color);
+    }
+    .console-key {
+      color: var(--console-key-color);
+    }
+    .console-string,
+    .console-number,
+    .console-boolean,
+    .console-null {
+      color: var(--console-value-color);
+    }
+    .recommendation-box {
+      border-left: 4px solid #198754;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+    footer {
+      margin-top: auto;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+      background-color: #f1f4f6;
+    }
+    .plan-button {
+      margin-top: 0.5rem;
+    }
+    .modal {
+      width: 66.66%;
+    }
+    .modal * {
+      --bs-modal-width: 50%;
+    }
+    .modal-backdrop {
+      width: 66.66vw;
+    }
+    .card-title {
+      font-weight: bold;
+    }
+    .card-text {
+      font-size: 0.8rem;
+    }
+    .goal-setting {
+      margin-left: 5rem;
+    }
+    #goal-summary, 
+    #btn-open-goal-modal {
+      margin-left: 3.4rem;
+    }
+    #goal-summar button {
+      margin-top: .5rem;
+    }
+    #btn-complete-planning{
+      margin-left: 1rem;
+      width: fit-content;
+    }
+    .text-info {
+      color: black !important;
+    }
+    #modalRecommendationsContainer .card{
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .modal-header,
+    .modal-body,
+    .modal-footer{
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    .toast-container{
+      right: 33.33% !important;
+    }

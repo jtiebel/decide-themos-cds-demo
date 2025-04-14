@@ -1,0 +1,28 @@
+{
+  "resourceType": "Library",
+  "id": "goalset-cds-hook-library",
+  "url": "https://github.com/YourUser/YourRepo/goalset-cds-hook-library",
+  "version": "1.0.0",
+  "name": "GoalsetCDSHookLibrary",
+  "title": "Goalset CDS Hook Library",
+  "status": "active",
+  "experimental": true,
+  "description": "Library containing CDS Hook logic for triggering the goalset CDS action based on the fulfillment of three conditions: Stroke, Abnormal gait, and Gait re-education service request.",
+  "purpose": "Checks if the patient has a Stroke (ICD‑10 I63), an Abnormal gait (SNOMED 22325002), and a Gait Re-education (SNOMED 74914000) ServiceRequest.",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/library-type",
+        "code": "logic-library",
+        "display": "Logic Library"
+      }
+    ]
+  },
+  "content": [
+    {
+      "contentType": "text/cql",
+      "url": "https://raw.githubusercontent.com/YourUser/YourRepo/main/GoalsetCDSHook.cql",
+      "title": "GoalsetCDSHook.cql"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-example",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-example", 
+        "name": [
+          {
+            "family": "Musterfrau",
+            "given": [
+              "Erika"
+            ]
+          }
+        ],
+        "birthDate": "1958-06-12",
+        "gender": "female",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Patientin Erika Musterfrau</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-stroke",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-stroke",
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "I63",
+              "display": "Schlaganfall"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Diagnose: Schlaganfall (ICD-10: I63)</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-abnormal-gait",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-abnormal-gait",
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "22325002",
+              "display": "Abnormal gait"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Diagnose: Abnormal gait</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-barthel",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-barthel",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8355-8",
+              "display": "Barthel Index"
+            }
+          ]
+        },
+        "valueInteger": 35,
+        "effectiveDateTime": "2024-12-01T10:00:00+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/example"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Barthel Index: 35</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-nihss",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-nihss",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "72114-3",
+              "display": "NIH Stroke Scale"
+            }
+          ]
+        },
+        "valueInteger": 18,
+        "effectiveDateTime": "2024-12-01T10:00:00+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/example"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>NIHSS: 18</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-physiotherapy-training",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "servicerequest-physiotherapy-training",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "58452000",
+              "display": "Physiotherapy training"
+            }
+          ]
+        },
+        "reasonReference": [
+          {
+            "reference": "urn:uuid:condition-abnormal-gait"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Verordnung: Physiotherapie Training aufgrund Gangstörung</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-ambulation-training",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "servicerequest-ambulation-training",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "359665005",
+              "display": "Ambulation training"
+            }
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:servicerequest-physiotherapy-training"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Teilmaßnahme: Mobilitätstraining basierend auf Verordnung Physiotherapie</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-gait-training",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "servicerequest-gait-training",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "urn:uuid:patient-example"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "74914000",
+              "display": "Gait re-education"
+            }
+          ]
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:servicerequest-ambulation-training"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Teilmaßnahme: Gangtraining, abgeleitet aus Mobilitätstraining</div>"
+        }
+      }
+    }
+  ]
+}

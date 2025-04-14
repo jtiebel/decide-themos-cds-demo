@@ -1,0 +1,330 @@
+{
+  "name": "S3-Leitlinie TheMoS: Leitlinie zur Therapie der Mobilität nach Schlaganfall",
+  "byName": "TheMoS",
+  "language": "de",
+  "institutionId": 12345,
+  "guidelineId": 8930,
+  "publishedRecommendationCount": 0,
+  "defaultKeyInfoType": "RECOMMENDATION",
+  "sections": [
+    {
+      "sectionId": 1,
+      "parentId": null,
+      "order": 10,
+      "sectionType": "STANDARD",
+      "sectionLabel": "1",
+      "sectionNumber": "1",
+      "isNumbered": true,
+      "heading": "Zielgrößen",
+      "hasChildren": true,
+      "guidelineId": 8930,
+      "subSections": [
+        {
+          "sectionId": 2,
+          "parentId": 1,
+          "order": 10,
+          "sectionType": "STANDARD",
+          "sectionLabel": "1.1",
+          "sectionNumber": "1.1",
+          "isNumbered": true,
+          "heading": "Interventionen & Therapieansätze",
+          "hasChildren": false,
+          "counts": {
+            "recommendationCount": 2
+          },
+          "guidelineId": 8930,
+          "recommendations": [
+            {
+              "recommendationId": 1,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 1,
+              "strength": "WEAK",
+              "heading": "Endeffektor-basiertes Gangtraining",
+              "text": "Zur Verbesserung der Gehfähigkeit sollte bei initial nicht gehfähigen Patienten im subakuten Stadium nach Schlaganfall ein möglichst intensives Gangtraining mit oder ohne Einsatz eines endeffektor-basierten Gerätes (z. B. Gangtrainer) Teil des Therapieprogramms sein.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "282097004",
+                    "name": "Ability to walk",
+                    "description": "Verbesserung der Gehfähigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 1,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 2,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 2,
+              "strength": "WEAK",
+              "heading": "Laufbandtraining",
+              "text": "Bei Patienten im subakuten Stadium nach Schlaganfall, die bereits (mit Hilfe) einige Schritte gehen können, wird zur weiteren Förderung der Gehfähigkeit ein intensives Gehtraining unter Einschluss des Laufbands empfohlen.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "282097004",
+                    "name": "Ability to walk",
+                    "description": "Verbesserung der Gehfähigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 2,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 3,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 3,
+              "strength": "WEAK",
+              "heading": "Konventionelles Gehtraining",
+              "text": "Bei bereits gehfähigen Schlaganfallpatienten im subakuten Stadium sollte ein Übungsprogramm mit kontinuierlicher Steigerung des Schwierigkeitsgrades bzw. ein intensives Gehtraining (auf dem Laufband/Boden) zur Verbesserung der Gehfähigkeit durchgeführt werden",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "282097004",
+                    "name": "Ability to walk",
+                    "description": "Verbesserung der Gehfähigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 3,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 4,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 4,
+              "strength": "STRONG",
+              "heading": "Ausdauertraining",
+              "text": "Ein aufgabenbezogenes Ausdauertraining soll zur Verbesserung der Gehgeschwindigkeit in der subakuten Phase nach Schlaganfall eingesetzt werden. Zur Umsetzung eines aufgabenbezogenen Ausdauertrainings haben sich Laufbandtraining und ein progressives aufgabenbezogenes Zirkeltraining als geeignete Trainingsmethoden erwiesen..",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "724237005",
+                    "name": "Gait speed",
+                    "description": "Verbesserung der Gehgeschwindigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 4,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 5,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 5,
+              "strength": "WEAK",
+              "heading": "Endeffektor-basiertes Gangtraining",
+              "text": "Zur Steigerung der Gehgeschwindigkeit sollte bei Patienten im subakuten Stadium nach Schlaganfall ein intensives Gehtraining Teil des Therapieprogramms sein.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "724237005",
+                    "name": "Gait speed",
+                    "description": "Verbesserung der Gehgeschwindigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 5,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 6,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 6,
+              "strength": "WEAKAGAINST",
+              "heading": "Exoskelett-gestütztes Gangtraining",
+              "text": "Bei bereits gehfähigen Patienten sollte im subakuten Stadium nach Schlaganfall kein isoliertes Trainingsprogramm mit einem exoskelett gestützten Gerät (Lokomat/AutoAmbulator) zur Steigerung der Gehgeschwindigkeit erfolgen.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "724237005",
+                    "name": "Gait speed",
+                    "description": "Verbesserung der Gehgeschwindigkeit",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 6,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 7,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 7,
+              "strength": "STRONG",
+              "heading": "Ausdauertraining",
+              "text": "Ein aufgabenbezogenes Ausdauertraining soll in der subakuten Phase durchgeführt werden, wenn eine Verbesserung der Gehstrecke angestrebt wird (Empfehlungsgrad A). Zur Umsetzung eines aufgabenbezogenes Ausdauertrainings haben sich Laufbandtraining und ein progressives aufgabenbezogenes Zirkeltraining als geeignete Trainingsmethoden erwiesen.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "165263003",
+                    "name": "Walking distance",
+                    "description": "Verbesserung der Gehstrecke",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 7,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 8,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 8,
+              "strength": "WEAK",
+              "heading": "Laufbandtraining",
+              "text": "Das Trainingsprogramm zur Steigerung der Gehstrecke sollte insbesondere bei bereits (mit Hilfe) gehfähigen Patienten möglichst intensiv sein, z. B. in Form eines zusätzlichen intensiven Gehtrainings oder eines aeroben Laufbandtrainings, sofern dies der weitere Gesundheitszustand des Patienten (v. a. kardiopulmonal und orthopädisch) zulässt.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "165263003",
+                    "name": "Walking distance",
+                    "description": "Verbesserung der Gehstrecke",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 8,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 9,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 9,
+              "strength": "WEAK",
+              "heading": "Konventionelles Gehtraining",
+              "text": "Im subakuten Stadium nach Schlaganfall sollte ein Übungsprogramm mit individueller Steigerung des Schwierigkeitsgrades durchgeführt werden.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "165263003",
+                    "name": "Walking distance",
+                    "description": "Verbesserung der Gehstrecke",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 9,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 10,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 10,
+              "strength": "WEAK",
+              "heading": "Konventionelles Gehtraining",
+              "text": "Zur Verbesserung der Balance sollte bei eingeschränkt gehfähigen Patienten im subakuten Stadium ein Übungsprogramm mit den Elementen Kräftigung, Beweglichkeit, Balance- und Ausdauertraining mit individueller Progression durchgeführt werden (Empfehlungsgrad B). Verglichen mit einem intensiven Gehtraining ist sowohl das Gehen auf dem Laufband als auch auf dem Boden geeignet.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "249982003",
+                    "name": "Balance",
+                    "description": "Verbesserung des Gleichgewichtes",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 10,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 11,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 11,
+              "strength": "WEAK",
+              "heading": "Laufbandtraining",
+              "text": "Um die Anzahl von multiplen Stürzen oder von Stürzen mit Verletzungen zu vermindern, sollte bei schwerer betroffenen, aber bereits (mit Hilfe) gehfähige Patienten ein Gehtraining mit Laufbandeinsatz nicht ohne ein intensives Balancetraining erfolgen.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "249982003",
+                    "name": "Balance",
+                    "description": "Verbesserung des Gleichgewichtes",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 11,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            },
+            {
+              "recommendationId": 12,
+              "guidelineId": 8930,
+              "sectionId": 2,
+              "order": 12,
+              "strength": "WEAK",
+              "heading": "Motor Relearning",
+              "text": "Motor-Relearning sollte zur Verbesserung der Balance bei subakuten Patienten eingesetzt werden.",
+              "tags": "",
+              "interventions": {
+                "codes": [
+                  {
+                    "codeId": 3031,
+                    "code": "249982003",
+                    "name": "Balance",
+                    "description": "Verbesserung des Gleichgewichtes",
+                    "ontology": "SNOMED",
+                    "sectionId": 2,
+                    "recommendationId": 12,
+                    "type": "RECOMMENDATION"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

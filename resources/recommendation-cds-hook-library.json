@@ -1,0 +1,28 @@
+{
+  "resourceType": "Library",
+  "id": "guideline-recommendation-cds-hook-library",
+  "url": "https://github.com/YourUser/YourRepo/guideline-recommendation-cds-hook-library",
+  "version": "1.0.0",
+  "name": "GuidelineRecommendationCDSHookLibrary",
+  "title": "Guideline Recommendation CDS Hook Library",
+  "status": "active",
+  "experimental": true,
+  "description": "Library containing CDS Hook logic for triggering guideline recommendations based on the selected target goal ('Verbesserung der Gehfähigkeit' with code 282097004).",
+  "purpose": "Evaluates the presence of the specific target goal in the patient data to trigger the guideline recommendation CDS hook.",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/library-type",
+        "code": "logic-library",
+        "display": "Logic Library"
+      }
+    ]
+  },
+  "content": [
+    {
+      "contentType": "text/cql",
+      "url": "https://raw.githubusercontent.com/YourUser/YourRepo/main/GuidelineRecommendationCDSHook.cql",
+      "title": "GuidelineRecommendationCDSHook.cql"
+    }
+  ]
+}
