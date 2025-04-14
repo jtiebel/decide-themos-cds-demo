@@ -18,31 +18,44 @@ export const syntaxHighlight = json => {
 
 export function logToConsole(label, data, extra = {}) {
   const time = new Date().toLocaleTimeString();
-  
-  // Erstelle einen Header-Bereich, der den Zeitstempel, die Log-Message und (optional) den Link enthält
-  let headerHtml = `<div class="console-header">[${time}] ${label}:</div>`;
-  
-  // Wenn in extra.source ein Link enthalten ist, diesen als klickbaren Link einfügen
-  if (extra.source) {
-    headerHtml += `<div class="console-link">Source: ${extra.source}</div>`;
-    delete extra.source;  // Entferne den source-Eintrag, um Duplikate in extra zu vermeiden
-  }
-  
-  // Erstelle den pre-Bereich für die formatierten Daten
-  let preHtml = `<pre class="highlight">${syntaxHighlight(data)}</pre>`;
-  
-  // Bei zusätzlichen Details ebenfalls in einem separaten pre-Block darstellen
-  if (Object.keys(extra).length > 0) {
-    preHtml += `<pre class="highlight">Zusätzliche Details:<br>${syntaxHighlight(extra)}</pre>`;
-  }
-  
-  // Erstelle einen Container und setze innerHTML aus Header und pre-Block
+
+  // Erstelle einen Container für den kompletten Logeintrag
   const container = document.createElement('div');
-  container.innerHTML = headerHtml + preHtml;
-  
+  container.classList.add('console-entry');
+
+  // Header-DIV: Zeitstempel, Label
+  const headerDiv = document.createElement('div');
+  headerDiv.classList.add('console-header');
+  headerDiv.textContent = `[${time}] ${label}:`;
+  container.appendChild(headerDiv);
+
+  // Wenn extra.source vorhanden, erstelle einen separaten DIV mit einem klickbaren Link
+  if (extra.source) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('console-link');
+    linkDiv.innerHTML = `Source: ${extra.source}`;
+    container.appendChild(linkDiv);
+    delete extra.source; // Entferne den Link aus extra, um doppelte Darstellung zu vermeiden
+  }
+
+  // Erstelle einen separaten PRE-Bereich für die Daten
+  const preData = document.createElement('pre');
+  preData.classList.add('highlight');
+  preData.innerHTML = syntaxHighlight(data);
+  container.appendChild(preData);
+
+  // Falls zusätzliche Details vorhanden sind, füge sie in einem weiteren PRE ein
+  if (Object.keys(extra).length > 0) {
+    const preExtra = document.createElement('pre');
+    preExtra.classList.add('highlight');
+    preExtra.innerHTML = `Zusätzliche Details:\n${syntaxHighlight(extra)}`;
+    container.appendChild(preExtra);
+  }
+
+  // Füge den gesamten Container in das Console-DIV ein
   const consoleDiv = document.getElementById('console');
-  consoleDiv.append(container);
-  
-  // Scrollt automatisch ans Ende
+  consoleDiv.appendChild(container);
+
+  // Automatisches Scrollen ans Ende der Konsole
   setTimeout(() => { consoleDiv.scrollTop = consoleDiv.scrollHeight; }, 10);
 }
