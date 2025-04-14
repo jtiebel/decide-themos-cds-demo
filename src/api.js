@@ -6,17 +6,24 @@ export async function loadJSON(url) {
     const res = await fetch(url);
     // Erstelle einen anklickbaren Link zur Quelle
     const link = `<a href="${url}" target="_blank">${url}</a>`;
-    // Logge nur den Header mit URL und Status – keine vollständigen Daten
+    
+    // Logge die Meta-Antwort (kleines Objekt mit Status, ok etc.) – hier möchten wir diese Details sehen
     logToConsole(
       "FHIR Bundle Response",
       { resourceType: "Bundle", status: res.status, ok: res.ok },
+      { source: link }
+    );
+    
+    if (!res.ok) throw new Error(`HTTP-Fehler: ${res.status}`);
+    
+    const json = await res.json();
+    // Logge den geladenen Inhalt NICHT – also die Details des Bundles unterdrücken
+    logToConsole(
+      "FHIR Bundle Loaded",
+      { resourceType: json.resourceType, type: json.type },
       { source: link, hideData: true }
     );
-    if (!res.ok) throw new Error(`HTTP-Fehler: ${res.status}`);
-    const json = await res.json();
-    // Falls gewünscht kannst Du hier noch einen separaten Log-Eintrag für den geladenen Inhalt machen,
-    // oder diesen komplett unterdrücken.
-    // Beispiel: logToConsole("FHIR Bundle Loaded", json, { source: link });
+    
     return json;
   } catch (error) {
     logToConsole("Fehler beim Laden der JSON-Daten", { error: error.message });
