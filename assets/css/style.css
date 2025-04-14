@@ -107,6 +107,9 @@
       white-space: nowrap;
       margin: .5rem;
     }
+    .console-link a {
+      color: #fff;
+    }
     .recommendation-box {
       border-left: 4px solid #198754;
       padding-left: 1rem;
