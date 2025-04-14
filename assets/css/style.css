@@ -55,6 +55,10 @@
       min-width: 33.33%;
       max-width: 33.33%;
     }
+     .console-entry {
+         overflow-x: auto;
+         margin: 1rem;
+     }
     .app-header {
       background-color: #004080;
       color: white;
