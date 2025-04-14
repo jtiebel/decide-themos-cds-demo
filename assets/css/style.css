@@ -109,8 +109,9 @@
        color: var(--console-timestamp-color);
     }
     .console-box {
-      max-height: calc(100vh - 4rem);
-      white-space: pre-wrap;
+          max-height: calc(100vh - 4rem);
+    white-space: pre-wrap;
+    overflow-y: scroll;
     }
     .console-box pre {
       font-family: monospace;
