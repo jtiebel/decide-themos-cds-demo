@@ -8,8 +8,8 @@ class TherapyPlanApp {
   constructor() {
     this.apiEndpoints = {
       patient: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/patient-example.json", 
-      goalsetExample: "https://raw.githubusercontent.com/jtiebel/DECIDE/main/goalset-cds-example.json",
-      recommendationExample: "https://raw.githubusercontent.com/jtiebel/DECIDE/main/recommendation-cds-example.json"
+      goalsetExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/goalset-cds-example.json",
+      recommendationExample: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/recommendation-cds-example.json"
     };
     this.currentRecommendation = null;
     this.currentGoal = null;
@@ -298,8 +298,38 @@ async loadPatientData() {
         }
       });
     }
-    logToConsole("Extracted Recommendations", recs);
-    return recs;
+    // Transformation in FHIR PlanDefinition Ressource
+    const planDefinitions = recs.map(rec => ({
+      resourceType: "PlanDefinition",
+      id: `plandef-${rec.recommendationId}`,
+      title: rec.heading,
+      description: rec.text,
+      strength: rec.strength,
+      status: "active",
+      code: {
+        coding: [{
+          system: "http://myCDSS.com/recommendations",
+          code: `${rec.guidelineId}-${rec.recommendationId}`,
+          display: rec.heading
+        }]
+      },
+      action: [{
+        title: rec.interventions.codes[0].name,
+        code: "NA",
+        description: rec.interventions.codes[0].description,
+        ontology: "SNOMED",
+        type: rec.interventions.codes[0].type
+      }]
+    }));
+
+    const bundle = {
+      resourceType: "Bundle",
+      type: "collection",
+      entry: planDefinitions.map(pd => ({ resource: pd }))
+    };
+
+    logToConsole("Extracted Recommendations (PlanDefinition)", bundle);
+    return bundle;
   }
 
   displayRecommendationsRadioCards(recommendations) {
