@@ -107,6 +107,9 @@
       white-space: nowrap;
       margin: .5rem;
     }
+    .console-link .link{
+      margin-left: 1rem;
+    }
     .console-link a {
       color: #fff;
     }
