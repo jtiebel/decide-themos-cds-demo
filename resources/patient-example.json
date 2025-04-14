@@ -247,6 +247,17 @@
             "reference": "urn:uuid:servicerequest-ambulation-training"
           }
         ],
+          "reasonCode": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "22325002",
+          "display": "Abnormal gait"
+        }
+      ]
+    }
+  ],
         "text": {
           "status": "generated",
           "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Teilmaßnahme: Gangtraining, abgeleitet aus Mobilitätstraining</div>"
