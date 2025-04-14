@@ -7,7 +7,7 @@ import { logToConsole } from "./utilities.js";
 class TherapyPlanApp {
   constructor() {
     this.apiEndpoints = {
-      patient: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/resources/patient-example.json",
+      patient: "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/patient-example.json",
       goalsetExample: "https://raw.githubusercontent.com/jtiebel/DECIDE/main/goalset-cds-example.json",
       recommendationExample: "https://raw.githubusercontent.com/jtiebel/DECIDE/main/recommendation-cds-example.json"
     };
