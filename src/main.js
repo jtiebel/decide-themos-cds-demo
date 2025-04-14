@@ -50,6 +50,7 @@ class TherapyPlanApp {
         logToConsole("FHIR CDS Hook Trigger (Goalset)", {
           trigger: {
             conditionStroke: conditionStroke.code.coding[0],
+            // Hier wird der Zustand zwar geprüft, aber im UI wird nun immer der Physiotherapie-Link verwendet.
             conditionAbnormalGait: conditionAbnormalGait.code.coding[0],
             serviceRequestGait: serviceRequestGait.code.coding[0]
           },
@@ -130,7 +131,8 @@ class TherapyPlanApp {
         e => e.resource.resourceType === "Condition" && e.resource.id === "condition-abnormal-gait"
       )?.resource;
       UI.updateConditions(conditionStroke, "diagnosis-stroke-info");
-      UI.updateConditions(conditionAbnormalGait, "diagnosis-abnormal-gait-info");
+      // Anstelle der Standardanzeige wird hier der physiotherapie-spezifische Link angezeigt.
+      UI.updateAbnormalGaitInfo(conditionAbnormalGait);
       UI.updateObservations(observations);
       UI.updateServiceRequests(serviceRequests);
 
@@ -414,12 +416,13 @@ class TherapyPlanApp {
   }
 
   handlePlanComplete() {
-    document.querySelectorAll("#goal-summary button").forEach(btn => btn.style.display = "none");
+    // Blende nur die Steuerungen aus (Buttons), der Bereich mit den Zielen bleibt erhalten
     document.getElementById("btn-open-goal-modal").style.display = "none";
     document.getElementById("btn-complete-planning").style.display = "none";
-    const goalsInfoEl = document.getElementById("goal-summary");
-    goalsInfoEl.textContent = "Planung abgeschlossen";
-    goalsInfoEl.style.color = "green";
+    // Aktualisiere den Status im oberen Bereich (im Header), statt den gesamten Inhalt zu ersetzen
+    const statusEl = document.getElementById("goals-info");
+    statusEl.textContent = "Planung abgeschlossen";
+    statusEl.style.color = "green";
 
     const extraProcedure = {
       resourceType: "Procedure",
