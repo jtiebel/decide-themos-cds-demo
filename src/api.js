@@ -6,8 +6,11 @@ export async function loadJSON(url) {
     const res = await fetch(url);
     // Erstelle einen anklickbaren Link zur Quelle
     const link = `<a href="${url}" target="_blank">${url}</a>`;
-    // Logge FHIR Bundle Response inklusive URL
-    logToConsole("FHIR Bundle Response", { resourceType: "Bundle", status: res.status, ok: res.ok, source: link });
+    logToConsole(
+      "FHIR Bundle Response",
+      { resourceType: "Bundle", status: res.status, ok: res.ok },
+      { source: link }
+    );
     if (!res.ok) throw new Error(`HTTP-Fehler: ${res.status}`);
     const json = await res.json();
     logToConsole("FHIR Bundle Loaded", json);
