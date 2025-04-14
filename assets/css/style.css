@@ -77,6 +77,10 @@
     .card.active {
       border: 2px solid #007bff;
     }
+    .console-header{
+       font-size: .8rem;
+       color: var(--console-timestamp-color);
+    }
     .console-box {
       max-height: calc(100vh - 4rem);
       overflow-y: auto;
@@ -86,9 +90,6 @@
       font-family: monospace;
       margin-bottom: 1rem;
       padding-left: 0.5rem;
-    }
-    .console-timestamp {
-      color: var(--console-timestamp-color);
     }
     .console-key {
       color: var(--console-key-color);
