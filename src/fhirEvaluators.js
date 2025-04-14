@@ -18,7 +18,16 @@ import { logToConsole } from "./utilities.js";
  * @param {Object} patientBundle - FHIR-Bundle mit Patientendaten.
  * @returns {boolean} - TRUE, wenn die Voraussetzungen erfüllt sind; sonst FALSE.
  */
-export function evaluateTriggerGoalset(patientBundle) {
+
+export async function evaluateTriggerGoalset(patientBundle) {
+  // CDS Hook Library laden (muss vor der Evaluation erfolgen)
+  try {
+    await loadCDSHookLibrary();
+  } catch (error) {
+    // Falls das Laden fehlschlägt, kann die Evaluation eventuell nicht weiter durchgeführt werden.
+    // Hier kannst Du entscheiden, ob Du trotzdem weitermachst oder einen Fehler zurückgibst.
+  }
+  
   let hasStroke = false;
   let hasAbnormalGait = false;
   let hasGaitServiceRequest = false;
@@ -28,7 +37,7 @@ export function evaluateTriggerGoalset(patientBundle) {
     
     if (resource.resourceType === "Condition" && resource.code?.coding) {
       resource.code.coding.forEach(coding => {
-        // Hinweis: Hier wurde der ICD-10 Code 'I63.3' verwendet; passe diesen bei Bedarf an.
+        // Hinweis: Nutze 'I63.3' als Beispiel für Schlaganfall; passe diesen bei Bedarf an.
         if (coding.system === 'http://hl7.org/fhir/sid/icd-10' && coding.code === 'I63.3') {
           hasStroke = true;
         }
@@ -47,46 +56,10 @@ export function evaluateTriggerGoalset(patientBundle) {
     }
   });
 
-  // Logge die Evaluation der Triggerbedingungen:
   logToConsole("Evaluierung Goalset", { hasStroke, hasAbnormalGait, hasGaitServiceRequest });
-  const triggerResult = hasStroke && hasAbnormalGait && hasGaitServiceRequest;
-
-  // Pseudomäßiger Aufruf des CDS Hooks:
-  // Erstelle eine statische FHIR Library Resource, die den CDS Hook repräsentiert.
-  const cdsLibrary = {
-    "resourceType": "Library",
-    "id": "goalset-cds-hook-library",
-    "url": "https://github.com/YourUser/YourRepo/goalset-cds-hook-library",
-    "version": "1.0.0",
-    "name": "GoalsetCDSHookLibrary",
-    "title": "Goalset CDS Hook Library",
-    "status": "active",
-    "experimental": true,
-    "description": "Library containing CDS Hook logic for triggering the goalset CDS action based on the fulfillment of three conditions: Stroke, Abnormal gait, and Gait re-education service request.",
-    "purpose": "Checks if the patient has a Stroke (ICD‑10 I63.3), an Abnormal gait (SNOMED 22325002), and a Gait Re-education (SNOMED 74914000) ServiceRequest.",
-    "type": {
-      "coding": [
-        {
-          "system": "http://terminology.hl7.org/CodeSystem/library-type",
-          "code": "logic-library",
-          "display": "Logic Library"
-        }
-      ]
-    },
-    "content": [
-      {
-        "contentType": "text/cql",
-        "url": "https://raw.githubusercontent.com/YourUser/YourRepo/main/GoalsetCDSHook.cql",
-        "title": "GoalsetCDSHook.cql"
-      }
-    ]
-  };
-
-  // Logge den pseudomäßigen Aufruf des CDS Hooks:
-  logToConsole("Goalset CDS Hook Library", cdsLibrary);
-
-  return triggerResult;
+  return hasStroke && hasAbnormalGait && hasGaitServiceRequest;
 }
+
 
 /**
  * Evaluates whether a guideline recommendation has already been integrated in the patient data.
