@@ -21,6 +21,9 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
+#console >pre {
+    margin-left: 1rem;
+}
     html, body {
       margin: 0;
       padding: 0;
@@ -52,6 +55,9 @@
       text-align: center;
       padding: 2rem;
     }
+.console-wrapper h5 {
+    padding: 1rem;
+}
     .app__wrapper {
       flex: 0 0 66.66%;
       background-color: #f1f4f6;
@@ -109,7 +115,7 @@
     .console-box pre {
       font-family: monospace;
       margin-bottom: 1rem;
-      padding-left: 0.5rem;
+      padding-left: .2rem;
     }
     .console-key {
       color: var(--console-key-color);
