@@ -19,7 +19,7 @@ export const syntaxHighlight = json => {
 export function logToConsole(label, data, extra = {}) {
   const time = new Date().toLocaleTimeString();
 
-  // Erstelle einen Container für den kompletten Logeintrag
+  // Erstelle den Container für den Logeintrag
   const container = document.createElement('div');
   container.classList.add('console-entry');
 
@@ -29,24 +29,26 @@ export function logToConsole(label, data, extra = {}) {
   headerDiv.textContent = `[${time}] ${label}:`;
   container.appendChild(headerDiv);
 
-  // Falls extra.source vorhanden ist, einen separaten DIV mit dem klickbaren Link erzeugen
+  // Falls extra.source vorhanden, erstelle einen separaten DIV mit dem klickbaren Link
   if (extra.source) {
     const linkDiv = document.createElement('div');
     linkDiv.classList.add('console-link');
     linkDiv.innerHTML = `<span>{</span><br>source: ${extra.source}<br><span>}</span>`;
     container.appendChild(linkDiv);
-    // Den Link aus extra entfernen, damit er nicht noch in den pre-Bereich übernommen wird
+    // Den Link entfernen, damit er nicht doppelt erscheint
     delete extra.source;
   }
 
-  // PRE-Bereich für die formatierten JSON-Daten
-  const preData = document.createElement('pre');
-  preData.classList.add('highlight');
-  preData.innerHTML = syntaxHighlight(data);
-  container.appendChild(preData);
+  // Wenn extra.hideData true ist, keine Daten (also JSON) im pre-Block ausgeben
+  if (!extra.hideData) {
+    const preData = document.createElement('pre');
+    preData.classList.add('highlight');
+    preData.innerHTML = syntaxHighlight(data);
+    container.appendChild(preData);
+  }
 
-  // Falls weitere extra Details vorhanden sind, in einem separaten PRE ausgeben
-  if (Object.keys(extra).length > 0) {
+  // Falls zusätzliche Details (ohne hideData) vorhanden sind, in einem separaten PRE ausgeben
+  if (Object.keys(extra).length > 0 && !extra.hideData) {
     const preExtra = document.createElement('pre');
     preExtra.classList.add('highlight');
     preExtra.innerHTML = `Zusätzliche Details:\n${syntaxHighlight(extra)}`;
@@ -60,3 +62,5 @@ export function logToConsole(label, data, extra = {}) {
   // Automatisches Scrollen ans Ende
   setTimeout(() => { consoleDiv.scrollTop = consoleDiv.scrollHeight; }, 10);
 }
+
+
