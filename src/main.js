@@ -106,45 +106,50 @@ class TherapyPlanApp {
     document.getElementById("btn-complete-planning").addEventListener("click", () => this.handlePlanComplete());
   }
 
-  async loadPatientData() {
-    try {
-      this.bundle = await loadJSON(this.apiEndpoints.patient);
-      // Patienteninformationen aktualisieren
-      const patient = this.bundle.entry.find(e => e.resource.resourceType === "Patient")?.resource;
-      UI.updatePatientInfo(patient);
+async loadPatientData() {
+  try {
+    this.bundle = await loadJSON(this.apiEndpoints.patient);
+    // Patienteninformationen extrahieren
+    const patient = this.bundle.entry.find(e => e.resource.resourceType === "Patient")?.resource;
+    
+    // Patienteninformationen in der UI aktualisieren
+    UI.updatePatientInfo(patient);
+    
+    // Patient-Ressource als erster Logeintrag (vollständige Ausgabe)
+    logToConsole("Patient Resource", patient);
+    
+    // Weitere Ressourcen extrahieren und in der Konsole loggen
+    const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
+    const conditions = getResources("Condition");
+    const observations = getResources("Observation");
+    const serviceRequests = getResources("ServiceRequest");
 
-      // Weitere Ressourcen extrahieren und in die Konsole loggen
-      const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
-      const conditions = getResources("Condition");
-      const observations = getResources("Observation");
-      const serviceRequests = getResources("ServiceRequest");
+    conditions.forEach((cond, i) => logToConsole(`Condition Resource ${i + 1}`, cond));
+    observations.forEach((obs, i) => logToConsole(`Observation Resource ${i + 1}`, obs));
+    serviceRequests.forEach((sr, i) => logToConsole(`ServiceRequest Resource ${i + 1}`, sr));
 
-      patient.forEach((cond, i) => logToConsole(`Patient Resource`, pat));
-      conditions.forEach((cond, i) => logToConsole(`Condition Resource ${i + 1}`, cond));
-      observations.forEach((obs, i) => logToConsole(`Observation Resource ${i + 1}`, obs));
-      serviceRequests.forEach((sr, i) => logToConsole(`ServiceRequest Resource ${i + 1}`, sr));
+    // UI: Conditions aktualisieren
+    const conditionStroke = this.bundle.entry.find(
+      e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
+    )?.resource;
+    const conditionAbnormalGait = this.bundle.entry.find(
+      e => e.resource.resourceType === "Condition" && e.resource.id === "condition-abnormal-gait"
+    )?.resource;
+    
+    UI.updateConditions(conditionStroke, "diagnosis-stroke-info");
+    // Für den abnormal gait wird die originale Darstellung (22325002 – Abnormal gait) genutzt.
+    UI.updateAbnormalGaitInfo(conditionAbnormalGait);
+    UI.updateObservations(observations);
+    UI.updateServiceRequests(serviceRequests);
 
-      // UI: Conditions aktualisieren
-      const conditionStroke = this.bundle.entry.find(
-        e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
-      )?.resource;
-      const conditionAbnormalGait = this.bundle.entry.find(
-        e => e.resource.resourceType === "Condition" && e.resource.id === "condition-abnormal-gait"
-      )?.resource;
-      UI.updateConditions(conditionStroke, "diagnosis-stroke-info");
-      // Anstelle der Standardanzeige wird hier der physiotherapie-spezifische Link angezeigt.
-      UI.updateAbnormalGaitInfo(conditionAbnormalGait);
-      UI.updateObservations(observations);
-      UI.updateServiceRequests(serviceRequests);
-
-    } catch (err) {
-      logToConsole("FHIR Error", {
-        resourceType: "OperationOutcome",
-        issue: [{ severity: "error", code: "exception", details: { text: err.message } }]
-      });
-      alert("Fehler beim Laden der Patientendaten.");
-    }
+  } catch (err) {
+    logToConsole("FHIR Error", {
+      resourceType: "OperationOutcome",
+      issue: [{ severity: "error", code: "exception", details: { text: err.message } }]
+    });
+    alert("Fehler beim Laden der Patientendaten.");
   }
+}
 
   async evaluateGoalsetHook(patientBundle) {
     try {
