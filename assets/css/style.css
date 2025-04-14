@@ -104,7 +104,6 @@
       color: var(--console-key-color);
       display: inline-block;
       white-space: nowrap;
-      margin-left: .5rem;
       margin: .5rem;
     }
     .recommendation-box {
