@@ -168,7 +168,8 @@
       width: 66.66%;
     }
     .modal * {
-      --bs-modal-width: 50%;
+      --bs-modal-width: 90%;
+     max-width: 800px;
     }
     .modal-backdrop {
       width: 66.66vw;
