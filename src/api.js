@@ -1,7 +1,8 @@
 // File: src/api.js
+
 import { logToConsole } from './utilities.js';
 
-// Generische Funktion zum Laden von JSON-Daten
+// Funktion zum Laden von JSON-Daten
 export async function loadJSON(url) {
   try {
     const res = await fetch(url);
