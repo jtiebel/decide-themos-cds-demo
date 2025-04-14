@@ -102,13 +102,18 @@
     }
     .console-link {
       font-size: .8rem;
-      color: var(--console-key-color);
       display: inline-block;
       white-space: nowrap;
       margin: .5rem;
     }
+    .console-link .span{
+      color: var(--console-key-color);
+    }
     .console-link .link{
-      margin-left: 1rem;
+      padding-left: 1rem;
+    }
+    .console-link .wrap {
+      color: #d4d4d4;
     }
     .console-link a {
       color: #fff;
