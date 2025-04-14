@@ -119,6 +119,7 @@ class TherapyPlanApp {
       const observations = getResources("Observation");
       const serviceRequests = getResources("ServiceRequest");
 
+      patient.forEach((cond, i) => logToConsole(`Patient Resource`, pat));
       conditions.forEach((cond, i) => logToConsole(`Condition Resource ${i + 1}`, cond));
       observations.forEach((obs, i) => logToConsole(`Observation Resource ${i + 1}`, obs));
       serviceRequests.forEach((sr, i) => logToConsole(`ServiceRequest Resource ${i + 1}`, sr));
