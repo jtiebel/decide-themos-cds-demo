@@ -1,5 +1,4 @@
-# FHIR-based Guideline CDS Demo
-## DECIDE - Digitale Leitlinie zur Therapie der Mobilität nach Schlaganfall
+# DECIDE TheMoS FHIR-based Guideline CDS Implementation
 
 Dieses Repository enthält eine Webanwendung, die eine Demonstration einer EHR-Umgebung (Electronic Health Record) darstellt. Die Anwendung fokussiert sich auf die Therapieplanung bei Schlaganfallpatienten, indem FHIR-Daten (Fast Healthcare Interoperability Resources) in ein interaktives Frontend integriert werden. Dabei werden sowohl Patientenstammdaten als auch klinische Informationen genutzt, um dynamisch Therapieziele, Leitlinienempfehlungen und einen kompletten Pflegeplan (CarePlan) zu erstellen.
 
