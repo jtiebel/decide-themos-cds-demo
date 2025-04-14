@@ -1,6 +1,26 @@
 import { logToConsole } from "./utilities.js";
 
 /**
+ * Loads the Goalset CDS Hook Library from a remote URL and logs it.
+ * @returns {Promise<Object>} Das CDS Hook Library Objekt (als JSON).
+ */
+async function loadCDSHookLibrary() {
+  const libraryUrl = "https://raw.githubusercontent.com/YourUser/YourRepo/goalset-cds-hook-library.json";
+  try {
+    const res = await fetch(libraryUrl);
+    if (!res.ok) {
+      throw new Error(`HTTP-Fehler beim Laden der CDS Library: ${res.status}`);
+    }
+    const library = await res.json();
+    logToConsole("Goalset CDS Hook Library", library);
+    return library;
+  } catch (error) {
+    logToConsole("Fehler beim Laden der CDS Hook Library", { error: error.message });
+    throw error;
+  }
+}
+
+/**
  * Evaluates whether the trigger for setting a therapy goal should be activated.
  *
  * Ablauf:
