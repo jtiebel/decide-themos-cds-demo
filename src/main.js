@@ -105,50 +105,50 @@ class TherapyPlanApp {
     document.getElementById("btn-complete-planning").addEventListener("click", () => this.handlePlanComplete());
   }
 
-async loadPatientData() {
-  try {
-    this.bundle = await loadJSON(this.apiEndpoints.patient);
-    // Patienteninformationen extrahieren
-    const patient = this.bundle.entry.find(e => e.resource.resourceType === "Patient")?.resource;
-    
-    // Patienteninformationen in der UI aktualisieren
-    UI.updatePatientInfo(patient);
-    
-    // Patient-Ressource als erster Logeintrag (vollständige Ausgabe)
-    logToConsole("FHIR Resource Patient", patient);
-    
-    // Weitere Ressourcen extrahieren und in der Konsole loggen
-    const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
-    const conditions = getResources("Condition");
-    const observations = getResources("Observation");
-    const serviceRequests = getResources("ServiceRequest");
+  async loadPatientData() {
+    try {
+      this.bundle = await loadJSON(this.apiEndpoints.patient);
+      // Patienteninformationen extrahieren
+      const patient = this.bundle.entry.find(e => e.resource.resourceType === "Patient")?.resource;
+      
+      // Patienteninformationen in der UI aktualisieren
+      UI.updatePatientInfo(patient);
+      
+      // Patient-Ressource als erster Logeintrag (vollständige Ausgabe)
+      logToConsole("FHIR Resource Patient", patient);
+      
+      // Weitere Ressourcen extrahieren und in der Konsole loggen
+      const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
+      const conditions = getResources("Condition");
+      const observations = getResources("Observation");
+      const serviceRequests = getResources("ServiceRequest");
 
-    conditions.forEach((cond, i) => logToConsole(`FHIR Resource Condition ${i + 1}`, cond));
-    observations.forEach((obs, i) => logToConsole(`FHIR Resource Observation ${i + 1}`, obs));
-    serviceRequests.forEach((sr, i) => logToConsole(`FHIR Resource ServiceRequest ${i + 1}`, sr));
+      conditions.forEach((cond, i) => logToConsole(`FHIR Resource Condition ${i + 1}`, cond));
+      observations.forEach((obs, i) => logToConsole(`FHIR Resource Observation ${i + 1}`, obs));
+      serviceRequests.forEach((sr, i) => logToConsole(`FHIR Resource ServiceRequest ${i + 1}`, sr));
 
-    // UI: Conditions aktualisieren
-    const conditionStroke = this.bundle.entry.find(
-      e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
-    )?.resource;
-    const conditionAbnormalGait = this.bundle.entry.find(
-      e => e.resource.resourceType === "Condition" && e.resource.id === "condition-abnormal-gait"
-    )?.resource;
-    
-    UI.updateConditions(conditionStroke, "diagnosis-stroke-info");
-    // Für den abnormal gait wird die originale Darstellung (22325002 – Abnormal gait) genutzt.
-    UI.updateAbnormalGaitInfo(conditionAbnormalGait);
-    UI.updateObservations(observations);
-    UI.updateServiceRequests(serviceRequests);
+      // UI: Conditions aktualisieren
+      const conditionStroke = this.bundle.entry.find(
+        e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
+      )?.resource;
+      const conditionAbnormalGait = this.bundle.entry.find(
+        e => e.resource.resourceType === "Condition" && e.resource.id === "condition-abnormal-gait"
+      )?.resource;
+      
+      UI.updateConditions(conditionStroke, "diagnosis-stroke-info");
+      // Für den abnormal gait wird die originale Darstellung (22325002 – Abnormal gait) genutzt.
+      UI.updateAbnormalGaitInfo(conditionAbnormalGait);
+      UI.updateObservations(observations);
+      UI.updateServiceRequests(serviceRequests);
 
-  } catch (err) {
-    logToConsole("FHIR Error", {
-      resourceType: "OperationOutcome",
-      issue: [{ severity: "error", code: "exception", details: { text: err.message } }]
-    });
-    alert("Fehler beim Laden der Patientendaten.");
+    } catch (err) {
+      logToConsole("FHIR Error", {
+        resourceType: "OperationOutcome",
+        issue: [{ severity: "error", code: "exception", details: { text: err.message } }]
+      });
+      alert("Fehler beim Laden der Patientendaten.");
+    }
   }
-}
 
   async evaluateGoalsetHook(patientBundle) {
     try {
@@ -268,8 +268,9 @@ async loadPatientData() {
       logToConsole("Recommendation Trigger Evaluation", { code, triggerResult });
       if (triggerResult) {
         const recommendationData = await loadJSON(this.apiEndpoints.recommendationExample);
-        const extractedRecs = this.extractRecommendations(recommendationData, code);
-        this.guidelineRecs = extractedRecs;
+        // Transformiere die extrahierten Recommendations in FHIR PlanDefinition Ressourcen
+        const planDefBundle = this.extractRecommendations(recommendationData, code);
+        this.guidelineRecs = planDefBundle;
         return this.guidelineRecs;
       } else {
         logToConsole("Recommendation Evaluation", "Kein Trigger – Recommendation Example wird nicht geladen.");
@@ -281,6 +282,10 @@ async loadPatientData() {
     }
   }
 
+  /**
+   * Extrahiert Recommendations aus dem geladenen Recommendation-Example,
+   * transformiert sie in FHIR PlanDefinition-Ressourcen und verpackt sie in ein Bundle.
+   */
   extractRecommendations(recommendationData, targetCode) {
     let recs = [];
     if (recommendationData.sections) {
@@ -333,26 +338,30 @@ async loadPatientData() {
   }
 
   displayRecommendationsRadioCards(recommendations) {
+    // Im Fall von recommendations sind nun FHIR Bundles (PlanDefinition-Collection)
+    // Um die Empfehlungen anzuzeigen, extrahieren wir zunächst die einzelnen PlanDefinitions
+    const planDefs = recommendations.entry.map(e => e.resource);
     const container = document.getElementById("modalRecommendationsContainer");
     container.innerHTML = `
       <div class="mb-2 text-info">
-        Über das integrierte Clinical Decision Support System (CDSS) wurden <strong>${recommendations.length}</strong> Interventionen für das gewählte Ziel gefunden.
+        Über das integrierte Clinical Decision Support System (CDSS) wurden <strong>${planDefs.length}</strong> Interventionen für das gewählte Ziel gefunden.
       </div>
-      ${recommendations.map((rec, idx) => {
-        const strengthUpper = rec.strength.toUpperCase();
+      ${planDefs.map((pd, idx) => {
+        // Verwende den "strength" Wert für die Darstellung der Empfehlung
+        const strengthUpper = pd.strength.toUpperCase();
         const strengthMap = {
           "STRONG": { text: "Starke Empfehlung", badge: "bg-success" },
           "WEAK": { text: "Schwache Empfehlung", badge: "bg-warning" },
           "WEAKAGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" },
           "WEAK AGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" }
         };
-        const { text: strengthText, badge: badgeClass } = strengthMap[strengthUpper] || { text: rec.strength, badge: "bg-secondary" };
+        const { text: strengthText, badge: badgeClass } = strengthMap[strengthUpper] || { text: pd.strength, badge: "bg-secondary" };
         const badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.8rem; margin-left:10px;">${strengthText}</span>`;
         return `
           <div class="card mb-2" data-index="${idx}" style="cursor: pointer;">
             <div class="card-body">
-              <h6><b>${rec.heading}${badgeHtml}</b></h6>
-              <p style="font-size:.9rem;color: grey">${rec.text}</p>
+              <h6><b>${pd.title}${badgeHtml}</b></h6>
+              <p style="font-size:.9rem;color: grey">${pd.description}</p>
             </div>
           </div>
         `;
@@ -363,30 +372,10 @@ async loadPatientData() {
         container.querySelectorAll('.card').forEach(c => c.classList.remove("active"));
         card.classList.add("active");
         const index = card.getAttribute("data-index");
-        this.currentRecommendation = recommendations[index];
-        const fhirIntervention = {
-          resourceType: "PlanDefinition",
-          id: `plandef-${this.currentRecommendation.recommendationId}`,
-          title: this.currentRecommendation.heading,
-          description: this.currentRecommendation.text,
-          strength: this.currentRecommendation.strength,
-          status: "active",
-          code: {
-            coding: [{
-              system: "http://myCDSS.com/recommendations",
-              code: `${this.currentRecommendation.guidelineId}-${this.currentRecommendation.recommendationId}`,
-              display: this.currentRecommendation.heading
-            }]
-          },
-          action: [{
-            title: this.currentRecommendation.interventions.codes[0].name,
-            code: "NA",
-            description: this.currentRecommendation.interventions.codes[0].description,
-            ontology: "SNOMED",
-            type: this.currentRecommendation.interventions.codes[0].type
-          }]
-        };
-        logToConsole("Intervention ausgewählt (FHIR-Format)", fhirIntervention);
+        // Setze die aktuelle Recommendation als PlanDefinition
+        const planDef = recommendations.entry[index].resource;
+        this.currentRecommendation = planDef;
+        logToConsole("Intervention ausgewählt (FHIR-Format)", planDef);
         document.getElementById("modalPlanForm").classList.remove("d-none");
         document.getElementById("btnConfirmGuideline").disabled = false;
       });
@@ -401,7 +390,7 @@ async loadPatientData() {
     const freq = document.getElementById("freqInputModal").value || "2";
     const dur = document.getElementById("durInputModal").value || "30";
     this.currentGoal.intervention = {
-      heading: this.currentRecommendation.heading,
+      heading: this.currentRecommendation.title,
       frequency: freq,
       duration: dur
     };
@@ -430,7 +419,7 @@ async loadPatientData() {
         }]
       },
       note: [{
-        text: `${this.currentRecommendation.heading} – ${this.currentRecommendation.text}`
+        text: `${this.currentRecommendation.title} – ${this.currentRecommendation.description}`
       }],
       performedPeriod: { start: new Date().toISOString() },
       occurrenceTiming: {
