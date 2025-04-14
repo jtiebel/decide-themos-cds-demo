@@ -1,4 +1,3 @@
-// File: src/main.js
 import { loadJSON } from "./api.js";
 import { evaluateTriggerGoalset, evaluateTriggerGuidelineRecommendation } from "./fhirEvaluators.js";
 import * as UI from "./ui.js";
@@ -20,6 +19,7 @@ class TherapyPlanApp {
     this.guidelineRecs = [];
     // Referenzen auf modale Elemente (Bootstrap) werden später initialisiert
     this.goalSettingModal = new bootstrap.Modal(document.getElementById("goalSettingModal"));
+    this.guidelineModal = new bootstrap.Modal(document.getElementById("guidelineModal"));
   }
 
   init() {
@@ -30,8 +30,8 @@ class TherapyPlanApp {
   }
 
   bindEvents() {
+    // Event: Öffne das Goalset Modal und prüfe Trigger-Bedingungen
     document.getElementById("btn-open-goal-modal").addEventListener("click", async () => {
-      // Beispiel: Trigger-Bedingungen prüfen (aus dem Bundle extrahieren)
       const patientBundle = this.bundle;
       const conditionStroke = patientBundle.entry.find(
         e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
@@ -62,6 +62,7 @@ class TherapyPlanApp {
           dynamicGoalset.entry.forEach(entry => {
             const goal = entry.resource;
             if (goal.resourceType === "Goal") {
+              // data-name erhält coding.display, data-display erhält description.text.
               const coding = goal.description && goal.description.coding && goal.description.coding[0];
               const noteText = goal.note && goal.note[0] ? goal.note[0].text : "";
               if (coding) {
@@ -85,13 +86,22 @@ class TherapyPlanApp {
       this.goalSettingModal.show();
     });
 
+    // Event: Aktualisiere Zielformulierung beim Ändern der Auswahl
     document.getElementById("modal-rehaziel").addEventListener("change", function () {
       document.getElementById("modal-ziel-description").value =
         this.options[this.selectedIndex].getAttribute("data-description") || "";
     });
 
+    // Event: Übernehme das im Modal erstellte Ziel
     document.getElementById("modal-btn-accept-goal").addEventListener("click", () => this.handleModalGoalAccept());
 
+    // Event: Absenden des Guideline-Formulars
+    document.getElementById("guidelineForm").addEventListener("submit", e => {
+      e.preventDefault();
+      this.handleGuidelineFormSubmit();
+    });
+
+    // Event: Abschluss der Planung
     document.getElementById("btn-complete-planning").addEventListener("click", () => this.handlePlanComplete());
   }
 
@@ -102,7 +112,7 @@ class TherapyPlanApp {
       const patient = this.bundle.entry.find(e => e.resource.resourceType === "Patient")?.resource;
       UI.updatePatientInfo(patient);
 
-      // Aktualisiere weitere UI-Bereiche
+      // Weitere Ressourcen extrahieren und in die Konsole loggen
       const getResources = type => this.bundle.entry.filter(e => e.resource.resourceType === type).map(e => e.resource);
       const conditions = getResources("Condition");
       const observations = getResources("Observation");
@@ -112,7 +122,7 @@ class TherapyPlanApp {
       observations.forEach((obs, i) => logToConsole(`Observation Resource ${i + 1}`, obs));
       serviceRequests.forEach((sr, i) => logToConsole(`ServiceRequest Resource ${i + 1}`, sr));
 
-      // Beispiel: Aktualisiere Condition-Informationen
+      // UI: Conditions aktualisieren
       const conditionStroke = this.bundle.entry.find(
         e => e.resource.resourceType === "Condition" && e.resource.id === "condition-stroke"
       )?.resource;
@@ -226,11 +236,14 @@ class TherapyPlanApp {
       user: { role: "Therapist", name: "Therapeut XY" },
       message: "Abfrage der Leitlinie erfolgt."
     });
-    // Hier würde ein Modal zur Anzeige der Leitlinienempfehlungen geöffnet
-    // Beispielhafter Ablauf:
     this.runGuidelineCheck(this.currentGoal.target[0].measure.coding[0].code)
       .then(() => {
-        // Empfehlungen anzeigen, etc.
+        // Anzeigen der Empfehlungen im Guideline-Modal
+        document.getElementById("modalRecommendationsContainer").classList.remove("d-none");
+        document.getElementById("modalPlanForm").classList.add("d-none");
+        document.getElementById("btnConfirmGuideline").disabled = true;
+        this.displayRecommendationsRadioCards(this.guidelineRecs);
+        this.guidelineModal.show();
       })
       .catch(err => console.error("Fehler beim Laden der Leitlinienempfehlungen", err));
   }
@@ -250,7 +263,6 @@ class TherapyPlanApp {
       if (triggerResult) {
         const recommendationData = await loadJSON(this.apiEndpoints.recommendationExample);
         logToConsole("Recommendation Example Loaded", recommendationData, { cdsLibrary: "RecommendationCDSHook", version: "1.0.0" });
-        // Extrahiere Recommendations anhand deines targetCode
         const extractedRecs = this.extractRecommendations(recommendationData, code);
         this.guidelineRecs = extractedRecs;
         return this.guidelineRecs;
@@ -283,6 +295,122 @@ class TherapyPlanApp {
     }
     logToConsole("Extracted Recommendations", recs);
     return recs;
+  }
+
+  displayRecommendationsRadioCards(recommendations) {
+    const container = document.getElementById("modalRecommendationsContainer");
+    container.innerHTML = `
+      <div class="mb-2 text-info">
+        Über das integrierte Clinical Decision Support System (CDSS) wurden <strong>${recommendations.length}</strong> Interventionen für das gewählte Ziel gefunden.
+      </div>
+      ${recommendations.map((rec, idx) => {
+        const strengthUpper = rec.strength.toUpperCase();
+        const strengthMap = {
+          "STRONG": { text: "Starke Empfehlung", badge: "bg-success" },
+          "WEAK": { text: "Schwache Empfehlung", badge: "bg-warning" },
+          "WEAKAGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" },
+          "WEAK AGAINST": { text: "Schwache Empfehlung gegen", badge: "bg-danger" }
+        };
+        const { text: strengthText, badge: badgeClass } = strengthMap[strengthUpper] || { text: rec.strength, badge: "bg-secondary" };
+        const badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.8rem; margin-left:10px;">${strengthText}</span>`;
+        return `
+          <div class="card mb-2" data-index="${idx}" style="cursor: pointer;">
+            <div class="card-body">
+              <h6><b>${rec.heading}${badgeHtml}</b></h6>
+              <p style="font-size:.9rem;color: grey">${rec.text}</p>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    `;
+    container.querySelectorAll('.card').forEach(card => {
+      card.addEventListener("click", () => {
+        container.querySelectorAll('.card').forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        const index = card.getAttribute("data-index");
+        this.currentRecommendation = recommendations[index];
+        const fhirIntervention = {
+          resourceType: "PlanDefinition",
+          id: `plandef-${this.currentRecommendation.recommendationId}`,
+          title: this.currentRecommendation.heading,
+          description: this.currentRecommendation.text,
+          strength: this.currentRecommendation.strength,
+          status: "active",
+          code: {
+            coding: [{
+              system: "http://myCDSS.com/recommendations",
+              code: `${this.currentRecommendation.guidelineId}-${this.currentRecommendation.recommendationId}`,
+              display: this.currentRecommendation.heading
+            }]
+          },
+          action: [{
+            title: this.currentRecommendation.interventions.codes[0].name,
+            code: "NA",
+            description: this.currentRecommendation.interventions.codes[0].description,
+            ontology: "SNOMED",
+            type: this.currentRecommendation.interventions.codes[0].type
+          }]
+        };
+        logToConsole("Intervention ausgewählt (FHIR-Format)", fhirIntervention);
+        document.getElementById("modalPlanForm").classList.remove("d-none");
+        document.getElementById("btnConfirmGuideline").disabled = false;
+      });
+    });
+  }
+
+  handleGuidelineFormSubmit() {
+    if (!this.currentRecommendation) {
+      logToConsole("Fehler", { message: "Es wurde keine Intervention ausgewählt." });
+      return;
+    }
+    const freq = document.getElementById("freqInputModal").value || "2";
+    const dur = document.getElementById("durInputModal").value || "30";
+    this.currentGoal.intervention = {
+      heading: this.currentRecommendation.heading,
+      frequency: freq,
+      duration: dur
+    };
+    const proc = this.createProcedure(freq, dur);
+    this.goalProcedures.push({ goalId: this.currentGoal.id, procedure: proc });
+    this.renderGoalList();
+    this.guidelineModal.hide();
+    new bootstrap.Toast(document.getElementById("interventionToast")).show();
+  }
+
+  createProcedure(freq, dur) {
+    if (!this.currentRecommendation) {
+      logToConsole("Procedure Error", { message: "Es wurde keine Intervention ausgewählt." });
+      return;
+    }
+    const proc = {
+      resourceType: "Procedure",
+      id: `procedure-${Date.now()}`,
+      status: "preparation",
+      subject: { reference: "urn:uuid:patient-example" },
+      code: {
+        coding: [{
+          system: "http://snomed.info/sct",
+          code: "NA",
+          display: "NA"
+        }]
+      },
+      note: [{
+        text: `${this.currentRecommendation.heading} – ${this.currentRecommendation.text}`
+      }],
+      performedPeriod: { start: new Date().toISOString() },
+      occurrenceTiming: {
+        repeat: {
+          frequency: parseInt(freq, 10),
+          period: 1,
+          periodUnit: "wk",
+          duration: parseInt(dur, 10),
+          durationUnit: "min"
+        }
+      },
+      reasonReference: [{ reference: `Goal/${this.currentGoal.id}` }]
+    };
+    logToConsole("Procedure (Therapieplanung)", proc);
+    return proc;
   }
 
   handlePlanComplete() {
