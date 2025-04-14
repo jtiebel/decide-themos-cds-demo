@@ -1,5 +1,4 @@
-// File: src/ui.js
-import { logToConsole } from './utilities.js';
+import { logToConsole } from "./utilities.js";
 
 // UI-Funktion: Aktualisiert die Patienteninformationen im DOM
 export function updatePatientInfo(patient) {
@@ -10,7 +9,7 @@ export function updatePatientInfo(patient) {
   `;
 }
 
-// Weitere Funktionen zur Darstellung von Conditions, Observations und Service Requests
+// Aktualisiert UI-Bereiche für Conditions
 export function updateConditions(condition, elementId) {
   if (condition) {
     const { code: { coding: [coding] } } = condition;
@@ -18,6 +17,7 @@ export function updateConditions(condition, elementId) {
   }
 }
 
+// Aktualisiert UI-Bereiche für Observations
 export function updateObservations(observations) {
   if (!observations || observations.length === 0) return;
   const obsHtml = observations.map(obs => {
@@ -28,6 +28,7 @@ export function updateObservations(observations) {
   document.getElementById('observations-info').innerHTML = `<div>${obsHtml}</div>`;
 }
 
+// Aktualisiert UI-Bereiche für Service Requests
 export function updateServiceRequests(serviceRequests) {
   if (!serviceRequests || serviceRequests.length === 0) return;
   let srHtml = "";
