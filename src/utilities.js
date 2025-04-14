@@ -1,4 +1,3 @@
-// File: src/utilities.js
 export const syntaxHighlight = json => {
   if (typeof json !== 'string') json = JSON.stringify(json, null, 2);
   return json.replace(/&/g, '&amp;')
@@ -26,7 +25,6 @@ export function logToConsole(label, data, extra = {}) {
   const pre = document.createElement('pre');
   pre.innerHTML = html;
   const consoleDiv = document.getElementById('console');
-  // Entferne evtl. alte Hervorhebungen
   consoleDiv.querySelectorAll('pre').forEach(el => el.classList.remove('highlight'));
   pre.classList.add('highlight');
   consoleDiv.append(pre);
