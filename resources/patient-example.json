@@ -120,7 +120,8 @@
         "effectiveDateTime": "2024-12-01T10:00:00+01:00",
         "performer": [
           {
-            "reference": "Practitioner/example-arzt"
+            "reference": "Practitioner/example-arzt",
+            "display": "Behandelnder Arzt"
           }
         ],
         "subject": {
@@ -151,7 +152,8 @@
         "effectiveDateTime": "2024-12-01T10:00:00+01:00",
         "performer": [
           {
-            "reference": "Practitioner/example-arzt"
+            "reference": "Practitioner/example-arzt",
+            "display": "Behandelnder Arzt"
           }
         ],
         "subject": {
