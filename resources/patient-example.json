@@ -3,10 +3,10 @@
   "type": "collection",
   "entry": [
     {
-      "fullUrl": "urn:uuid:patient-example",
+      "fullUrl": "urn:uuid:patient-example-erika",
       "resource": {
         "resourceType": "Patient",
-        "id": "patient-example", 
+        "id": "patient-example-erika", 
         "name": [
           {
             "family": "Musterfrau",
@@ -19,7 +19,7 @@
         "gender": "female",
         "text": {
           "status": "generated",
-          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Patientin Erika Musterfrau</div>"
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Patientin Erika Musterfrau, *1958-06-12</div>"
         }
       }
     },
@@ -29,7 +29,7 @@
         "resourceType": "Condition",
         "id": "condition-stroke",
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "code": {
           "coding": [
@@ -58,7 +58,7 @@
         },
         "text": {
           "status": "generated",
-          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Diagnose: Schlaganfall (ICD-10: I63)</div>"
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Diagnose: Hirninfarkt (I63.3 Cerebral infarction)</div>"
         }
       }
     },
@@ -68,7 +68,7 @@
         "resourceType": "Condition",
         "id": "condition-abnormal-gait",
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "code": {
           "coding": [
@@ -97,7 +97,7 @@
         },
         "text": {
           "status": "generated",
-          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Diagnose: Abnormal gait</div>"
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Gangstörung (22325002 Abnormal gait)</div>"
         }
       }
     },
@@ -120,11 +120,11 @@
         "effectiveDateTime": "2024-12-01T10:00:00+01:00",
         "performer": [
           {
-            "reference": "Practitioner/example"
+            "reference": "Practitioner/example-arzt"
           }
         ],
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "text": {
           "status": "generated",
@@ -151,15 +151,15 @@
         "effectiveDateTime": "2024-12-01T10:00:00+01:00",
         "performer": [
           {
-            "reference": "Practitioner/example"
+            "reference": "Practitioner/example-arzt"
           }
         ],
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "text": {
           "status": "generated",
-          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>NIHSS: 18</div>"
+          "div": "<div xmlns='http://www.w3.org/1999/xhtml'>NIH Stroke Scale: 18</div>"
         }
       }
     },
@@ -171,7 +171,7 @@
         "status": "active",
         "intent": "order",
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "code": {
           "coding": [
@@ -201,7 +201,7 @@
         "status": "active",
         "intent": "order",
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "code": {
           "coding": [
@@ -231,7 +231,7 @@
         "status": "active",
         "intent": "order",
         "subject": {
-          "reference": "urn:uuid:patient-example"
+          "reference": "urn:uuid:patient-example-erika"
         },
         "code": {
           "coding": [
