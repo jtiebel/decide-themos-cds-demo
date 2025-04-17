@@ -6,7 +6,7 @@
       "fullUrl": "Patient/patient-example-erika",
       "resource": {
         "resourceType": "Patient",
-        "id": "patient-example-erika", 
+        "id": "patient-example-erika",
         "name": [
           {
             "family": "Musterfrau",
@@ -94,7 +94,7 @@
               "code": "confirmed"
             }
           ]
-        },
+        ],
         "text": {
           "status": "generated",
           "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Gangstörung (22325002 Abnormal gait)</div>"
@@ -249,20 +249,57 @@
             "reference": "ServiceRequest/servicerequest-ambulation-training"
           }
         ],
-          "reasonCode": [
-    {
-      "coding": [
-        {
-          "system": "http://snomed.info/sct",
-          "code": "22325002",
-          "display": "Abnormal gait"
-        }
-      ]
-    }
-  ],
+        "reasonCode": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "22325002",
+                "display": "Abnormal gait"
+              }
+            ]
+          }
+        ],
         "text": {
           "status": "generated",
           "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Teilmaßnahme: Gangtraining, abgeleitet aus Mobilitätstraining</div>"
+        }
+      }
+    },
+    {
+      "fullUrl": "Task/task-initiate-pt-planning",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-initiate-pt-planning",
+        "status": "requested",
+        "intent": "order",
+        "priority": "routine",
+        "description": "Zieldefinition und Planung des Gangtrainings.",
+        "reasonCode": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "22325002",
+              "display": "Abnormal gait (finding)"
+            }
+          ],
+          "text": "Gangstörung"
+        },
+        "focus": {
+          "reference": "ServiceRequest/servicerequest-gait-training",
+          "type": "ServiceRequest",
+          "display": "Gangtraining (74914000 Gait re-education)"
+        },
+        "for": {
+          "reference": "Patient/patient-example-erika"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-example-arzt",
+          "display": "Behandelnder Arzt"
+        },
+        "owner": {
+          "reference": "Practitioner/practitioner-example-physio",
+          "display": "Physiotherapeutische Fachkraft"
         }
       }
     }
