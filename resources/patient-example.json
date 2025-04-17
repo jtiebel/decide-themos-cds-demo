@@ -87,14 +87,14 @@
             }
           ]
         },
-        "verificationStatus": {
-          "coding": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
-              "code": "confirmed"
-            }
-          ]
-        },
+       "verificationStatus": {
+        "coding": [
+           {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+           }
+         ]
+       },
         "text": {
           "status": "generated",
           "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Gangstörung (22325002 Abnormal gait)</div>"
