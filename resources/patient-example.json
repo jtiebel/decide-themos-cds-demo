@@ -94,7 +94,7 @@
               "code": "confirmed"
             }
           ]
-        ],
+        },
         "text": {
           "status": "generated",
           "div": "<div xmlns='http://www.w3.org/1999/xhtml'>Gangstörung (22325002 Abnormal gait)</div>"
