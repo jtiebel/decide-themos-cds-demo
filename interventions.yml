@@ -1,0 +1,91 @@
+Interventionen:
+  - Name: Gangvorbereitendes Training: Interventionen zur Verbesserung der Rumpffunktion
+    SCTID: 386293009
+    Term: Balance exercises (regime/therapy)
+  - Name: Bobath
+    SCTID: 228529001
+    Term: Neurodevelopmental techniques (regime/therapy)
+  - Name: (Früh-) Mobilisation
+    SCTID: 108305003
+    Term: Physical rehabilitation therapy procedure (regime/therapy)
+  - Name: Mobilisations- und Therapiedauer
+    SCTID: 261773006
+    Term: Duration of therapy (qualifier value)
+  - Name: Konventionelles Gangtraining (Gangtraining ohne technische Hilfsmittel)
+    SCTID: 183295006
+    Term: Neurological gait training (procedure)
+  - Name: Laufbandtraining
+    SCTID: 113131004
+    Term: Use of treadmill (regime/therapy)
+  - Name: Elektromechanisches Gangtraining
+    SCTID: 701696002
+    Term: Ambulatory automated-guidance gait rehabilitation system, clinical (physical object)
+  - Name: Ausdauertraining
+    SCTID: 88965008
+    Term: Muscular endurance development exercise (regime/therapy)
+  - Name: Krafttraining
+    SCTID: 386291006
+    Term: Exercise promotion: strength training (procedure)
+  - Name: Kombiniertes Training
+    SCTID: 183326003
+    Term: Combined physical therapy (regime/therapy)
+  - Name: Sturzpräventionsprogramm
+    SCTID: 386296001
+    Term: Fall prevention (procedure)
+  - Name: Gehhilfsmittel
+    SCTID: 710120003
+    Term: Promotion of walking using mobility aid (procedure)
+  - Name: Gangzyklusgetriggerte Elektrostimulation
+    SCTID: 469293000
+    Term: Gait-enhancement electrical stimulation system, external (physical object)
+  - Name: Botulinumtoxin
+    SCTID: 404909007
+    Term: Injection of botulinum toxin (procedure)
+  - Name: Mentales Training - BB
+    SCTID: 249893002
+    Term: Observation of gross motor movement (observable entity)
+  - Name: Mentales Training - BV
+    SCTID: 311621000
+    Term: Imagery therapy (regime/therapy)
+  - Name: rTMS, tDCs
+    SCTID: 362997005
+    Term: Brain stimulation (procedure)
+  - Name: Neglect Training
+    SCTID: 386485006
+    Term: Unilateral neglect care (regime/therapy)
+  - Name: Kognitiv-motorisches Training
+    SCTID: 311524001
+    Term: Functional skills training (procedure)
+  - Name: Rhythmisch akustische Stimulation mit Gehtraining
+    SCTID: 225926000
+    Term: Rhythmical exercises (regime/therapy)
+  - Name: Technken/Arten Motivation
+    SCTID: 56911000000000000000
+    Term: Giving encouragement to comply with physical activity program (regime/therapy)
+  - Name: Techniken/Arten computergestützte Rückmeldung
+    SCTID: 28150003
+    Term: Biofeedback procedure (regime/therapy)
+  - Name: Zielgrößen/Untersuchungsverfahren
+    SCTID: 110463001
+    Term: Therapeutic evaluation (procedure)
+  - Name: Informierte gemeinsame Entscheidungsfindung
+    SCTID: 710873001
+    Term: Involving client in decision making process (procedure)
+  - Name: Therapieintensität
+    SCTID: 277406006
+    Term: Dosages (qualifier value)
+  - Name: Einzel- vs Gruppentherapie
+    SCTID: 361182006
+    Term: Group exercise (regime/therapy)
+  - Name: Eigentraining
+    SCTID: 229075007
+    Term: Home exercise program (regime/therapy)
+  - Name: Teletherapie
+    SCTID: 879784008
+    Term: Telehealth rehabilitation monitoring (regime/therapy)
+  - Name: Intensivtherapie
+    SCTID: 228449008
+    Term: Frequency of exercise (observable entity)
+  - Name: Aktive vs passive Maßnahmen
+    SCTID: 86047003
+    Term: Active physical exercise (observable entity)

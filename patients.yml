@@ -1,0 +1,10 @@
+Patients:
+  - Name: Schlaganfall
+    SCTID: 230690007
+    Term: Cerebrovascular accident (disorder)
+  - Name: Gangstörung
+    SCTID: 22325002
+    Term: Abnormal gait (finding)
+  - Name: Erwachsenenalter
+    SCTID: 41847000
+    Term: Adulthood (qualifier value)

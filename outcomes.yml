@@ -1,0 +1,34 @@
+Outcomes:
+  - Name: Gehfähigkeit
+    SCTID: 282097004
+    Term: Ability to walk (observable entity)
+  - Name: Gehgeschwindigkeit
+    SCTID: 724237005
+    Term: Gait speed (observable entity)
+  - Name: Gehausdauer
+    SCTID: 165263003
+    Term: Walking distance (observable entity)
+  - Name: Anzahl der Stürze
+    SCTID: 298348009
+    Term: Number of falls (observable entity)
+  - Name: Sturzangst
+    SCTID: 401269004
+    Term: Fear of falling (finding)
+  - Name: Balance
+    SCTID: 249982003
+    Term: Balance (observable entity)
+  - Name: Rumpfstabilität
+    SCTID: 249853000
+    Term: Trunk control (observable entity)
+  - Name: Soziale Teilhabe
+    SCTID: 870688007
+    Term: Ability to participate in community social life (observable entity)
+  - Name: Gehen und Stehen bei Aktivitäten des täglichen Lebens
+    SCTID: 284545001
+    Term: Ability to perform activities of everyday life (observable entity)
+  - Name: Objektive kardiorvaskuläre Belastbarkeit beim Gehen
+    SCTID: 248243004
+    Term: Exercise tolerance (observable entity)
+  - Name: Subjektive kardiorvaskuläre Belastbarkeit beim Gehen
+    SCTID: 286577000
+    Term: Sense of personal capacity (finding)
