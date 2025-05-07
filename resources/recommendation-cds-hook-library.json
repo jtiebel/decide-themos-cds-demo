@@ -1,7 +1,7 @@
 {
   "resourceType": "Library",
   "id": "guideline-recommendation-cds-hook-library",
-  "url": "https://github.com/YourUser/YourRepo/guideline-recommendation-cds-hook-library",
+  "url": "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/guideline-recommendation-cds-hook-library.json",
   "version": "1.0.0",
   "name": "GuidelineRecommendationCDSHookLibrary",
   "title": "Guideline Recommendation CDS Hook Library",
@@ -21,7 +21,7 @@
   "content": [
     {
       "contentType": "text/cql",
-      "url": "https://raw.githubusercontent.com/YourUser/YourRepo/main/GuidelineRecommendationCDSHook.cql",
+      "url": "https://raw.githubusercontent.com/jtiebel/decide-themos-cds-demo/main/resources/GuidelineRecommendationCDSHook.cql",
       "title": "GuidelineRecommendationCDSHook.cql"
     }
   ]
